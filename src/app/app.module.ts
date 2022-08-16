@@ -9,6 +9,10 @@ import { EducacionComponent } from './componentes/educacion/educacion.component'
 import { AptitudesComponent } from './componentes/aptitudes/aptitudes.component';
 import { ProyectosComponent } from './componentes/proyectos/proyectos.component';
 import { PieComponent } from './componentes/pie/pie.component';
+import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-sesion.component';
+import { PortfolioComponent } from './componentes/portfolio/portfolio.component';
+import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,10 +23,15 @@ import { PieComponent } from './componentes/pie/pie.component';
     EducacionComponent,
     AptitudesComponent,
     ProyectosComponent,
-    PieComponent
+    PieComponent,
+    IniciarSesionComponent,
+    PortfolioComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
