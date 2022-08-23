@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { domicilio } from 'src/app/model/domicilio.model';
+import { persona } from 'src/app/model/persona.model';
+import { PersonaService } from 'src/app/servicios/persona.service';
 
 @Component({
   selector: 'app-encabezado',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EncabezadoComponent implements OnInit {
 
-  constructor() { }
+  persona: persona = new persona('','',new Date(),'','','','','','', new domicilio('',''));
+  
+
+  constructor(public personaService: PersonaService) { }
 
   ngOnInit(): void {
+
+    this.personaService.getPersona().subscribe(data => {this.persona = data;
+      console.log("DATA:", JSON.stringify(data));
+    });
+
+    // this.personaService.getDomicilio(1).subscribe(data => {this.domicilio = data;
+    //   console.log(this.domicilio);
+    // });
+
   }
 
 }

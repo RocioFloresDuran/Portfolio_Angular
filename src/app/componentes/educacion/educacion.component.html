@@ -1,12 +1,23 @@
-<div class="row">
-    
-    <div class="col"> 
-        <section>
-            <h2>Educación</h2>
-            <h4>Universidad Nacional del Nordeste - Facultad de Cs. Exactas Naturales y Agrimensura</h4>
+<section>
+    <h2>Educación</h2>
+            <!-- <h4>Universidad Nacional del Nordeste - Facultad de Cs. Exactas Naturales y Agrimensura</h4>
             <span>Licenciatura en Sistemas de Información</span> <br>
-            <span>2010 - Actualidad</span>
-        </section>
+            <span>2010 - Actualidad</span> -->
+    <div *ngFor= "let educ of educaciones" let i = index>
+        <div class="card mb-3">
+            <div class="row g-0">
+              <div class="col-md-2">
+                <img src={{educ.url_imagen}} class="img-fluid" alt="banner" id="educacion">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{educ.escuela}}</h5>
+                    <p class="card-text"><span>{{educ.titulo}} - {{educ.carrera}}</span></p>
+                    <p class="card-text"><small class="text-muted"> <span>{{educ.anio_inicio}} - {{educ.anio_fin}}</span></small></p>
+                </div>
+              </div>
+            </div>
+        </div>
     </div>
-
-</div>
+</section>
+   

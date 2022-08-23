@@ -1,12 +1,22 @@
-<div class="row">
-    
-    <div class="col"> 
-        <section>
-            <h2>Experiencia</h2>
-            <h4> Instituto de Previsión Social de la Provincia de Corrientes</h4>
+<section>
+  <h2>Experiencia</h2>
+            <!-- <h4> Instituto de Previsión Social de la Provincia de Corrientes</h4>
             <span>Área de Sistemas</span> <br>
-            <span> 2018 - 2020</span>
-        </section>
+            <span> 2018 - 2020</span> -->
+  <div *ngFor= "let exp of experiencias" let i = index>
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-2">
+          <img src={{exp.url_imagen}} class="img-fluid" alt="banner" id="experiencia">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+              <h5 class="card-title">{{exp.nombre_org}}</h5>
+              <p class="card-text"><span>{{exp.area_cargo}}</span></p>
+              <p class="card-text"><small class="text-muted"> <span>{{exp.anio_inicio}} - {{exp.anio_fin}}</span></small></p>
+          </div>
+        </div>
+      </div>
     </div>
-
-</div>
+  </div>
+</section>

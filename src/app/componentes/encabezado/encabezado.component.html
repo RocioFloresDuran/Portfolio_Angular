@@ -22,20 +22,23 @@
         </div>
 
         <div class="row" id="portada">
-                <img src="./assets/img/banner.png" class="img-fluid" alt="banner" id="banner">
+                <!-- <img src="./assets/img/banner.png" class="img-fluid" alt="banner" id="banner"> -->
+                <img src={{persona.url_header}} class="img-fluid" alt="banner" id="banner">
         </div>
                        
         <div class="row" id="perfil">
-                <img src="./assets/img/Yo.jpg" class="img-fluid float-start" alt="Rocío Flores Durán" id="Rocio">
+                <!-- <img src="./assets/img/Yo.jpg" class="img-fluid float-start" alt="Rocío Flores Durán" id="Rocio"> -->
+                <img src= {{persona.url_foto}} class="img-fluid float-start" alt="Rocío Flores Durán" id="Rocio">
         </div>
                
         <div class="row">
                 <section>
-                    <h2>Rocío Flores Durán</h2>
+                    <h2>{{persona.nombres}} {{persona.apellidos}}</h2>
                     <p>
-                        Estudiante en UNNE
+                        {{persona.descripcion}}
                     <br>
-                        Corrientes (Argentina)
+                        <!-- Corrientes (Argentina) -->
+                        {{persona.domicilio.localidad}} {{persona.domicilio.provincia}}
                     </p>
                 </section>
         </div>

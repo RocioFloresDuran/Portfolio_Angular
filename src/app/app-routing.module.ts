@@ -6,7 +6,7 @@ import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-ses
 const routes: Routes = [
   {path:'portfolio', component:PortfolioComponent},
   {path:'iniciar-sesion', component:IniciarSesionComponent},
-  {path:'', redirectTo:'iniciar-sesion', pathMatch:'full'}
+  // {path:'', redirectTo:'iniciar-sesion', pathMatch:'full'}
 ];
 
 
