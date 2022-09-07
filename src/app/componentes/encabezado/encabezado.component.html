@@ -6,43 +6,134 @@
 
         <div class="row" id="cabecera">
         
-        <div class="col">
+            <div class="col">
 
-            <img src="./assets/img/ArgProg3.png" class="" alt="Logo Argentina Programa" id="logo">
+                <img src="./assets/img/ArgProg3.png" class="" alt="Logo Argentina Programa" id="logo">
 
        
-            <img src="./assets/img/icons8-facebook-48.png" class="redes float-end" alt="">
+                <img src="./assets/img/icons8-facebook-48.png" class="redes float-end" alt="">
            
-            <img src="./assets/img/icons8-instagram-48.png" class="redes float-end" alt="">
+                <img src="./assets/img/icons8-instagram-48.png" class="redes float-end" alt="">
          
-            <img src="./assets/img/icons8-linkedin-48.png" class="redes float-end" alt="">
+                <img src="./assets/img/icons8-linkedin-48.png" class="redes float-end" alt="">
+
+            </div>
 
         </div>
 
-        </div>
+        <div class="row justify-content-end"  id="portada" style=" background-image: url({{persona.url_header}});">
+            <!-- <img src="./assets/img/banner.png" class="img-fluid" alt="banner" id="banner"> -->   
+             
+            <!-- Button trigger modal -->
+            <div class="col-2">
+                <button type="button" id="trigger"class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalBanner">
+                <i class="bi bi-pencil-fill"></i>
+                </button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="modalBanner" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                 <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Inserte URL de la imagen</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form (ngSubmit)="onEditar()">
+                                <textarea type="text" class="form-control" id="url_header" name="url_header" [(ngModel)] = "persona.url_header" required></textarea>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </form>
+                        </div>       
+                    </div>
+                </div>
+            </div>    
 
-        <div class="row" id="portada">
-                <!-- <img src="./assets/img/banner.png" class="img-fluid" alt="banner" id="banner"> -->
-                <img src={{persona.url_header}} class="img-fluid" alt="banner" id="banner">
         </div>
                        
         <div class="row" id="perfil">
+            <div class="col-10">
                 <!-- <img src="./assets/img/Yo.jpg" class="img-fluid float-start" alt="Rocío Flores Durán" id="Rocio"> -->
                 <img src= {{persona.url_foto}} class="img-fluid float-start" alt="Rocío Flores Durán" id="Rocio">
+            </div>
+                <!-- Button trigger modal -->
+            <div class="col-2">
+                <button type="button" id="trigger" class="btn btn-secondary float-end" data-bs-toggle="modal" data-bs-target="#modalPerfil">
+                    <i class="bi bi-pencil-fill"></i>
+                </button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="modalPerfil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                 <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Inserte URL de la foto de perfil</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form (ngSubmit)="onEditar()">
+                                <textarea type="text" class="form-control" id="url_foto" name="url_foto" [(ngModel)] = "persona.url_foto" required></textarea>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </form>
+                        </div>       
+                    </div>
+                </div>
+            </div> 
+
         </div>
                
-        <div class="row">
-                <section>
-                    <h2>{{persona.nombres}} {{persona.apellidos}}</h2>
-                    <p>
-                        {{persona.descripcion}}
-                    <br>
-                        <!-- Corrientes (Argentina) -->
-                        {{persona.domicilio.localidad}} {{persona.domicilio.provincia}}
-                    </p>
-                </section>
-        </div>
+        <div class="row justify-content-start" id="datosPersonales">
+                
+            <h2>{{persona.nombres}} {{persona.apellidos}}</h2>
+                    
+            <div class="col">
+                {{persona.ocupacion}}
+                    
+                <!-- Button trigger modal -->
+            
+                <button type="button" id="trigger" class="btn btn-secondary float-center" data-bs-toggle="modal" data-bs-target="#modalDatosPersonales">
+                    <i class="bi bi-pencil-fill"></i>
+                </button>
+            
+                <br>
+        
+                {{persona.domicilio.localidad}} {{persona.domicilio.provincia}}
+                    
+            </div>
 
+            <!-- Modal -->
+            <div class="modal fade" id="modalDatosPersonales" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <h5 class="modal-title" id="exampleModalLabel">Editar Datos Personales</h5>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                       </div>
+                       <div class="modal-body">
+                           <form (ngSubmit)="onEditar()">
+                               <label>Ocupación</label>
+                               <input type="text" class="form-control" id="ocupacion" name="ocupacion" [(ngModel)] = "persona.ocupacion" required>
+                               <label>Provincia</label>
+                               <input type="text" class="form-control" id="domicilio.provincia" name="domicilio.provincia" [(ngModel)] = "persona.domicilio.provincia" required>
+                               <label>Localidad</label>
+                               <input type="text" class="form-control" id="domicilio.localidad" name="domicilio.localidad" [(ngModel)] = "persona.domicilio.localidad" required>
+                               <div class="modal-footer">
+                                   <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                               </div>
+                           </form>
+                       </div>       
+                   </div>
+               </div>
+           </div>
+
+        </div>
+        
     </div>
 
 </header>

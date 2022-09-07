@@ -8,11 +8,20 @@ import { aptitud } from '../model/aptitud.model';
 })
 export class AptitudService {
 
-  url = 'http://localhost:8080/personas/aptitud/ver'
+  url = 'http://localhost:8080/personas/aptitud/'
 
   constructor(private http: HttpClient) { }
 
   public getAptitudes(): Observable<aptitud[]>{
-    return this.http.get<aptitud[]>(this.url);
+    return this.http.get<aptitud[]>(this.url + 'ver');
   }
+
+  public getAptitud(id:any): Observable<aptitud>{
+    return this.http.get<aptitud>(this.url + `${id}`);
+  }
+
+  public editarAptitud(aptitud: aptitud): Observable<any>{
+    return this.http.put<any>(this.url + 'editar', aptitud);
+  }
+
 }

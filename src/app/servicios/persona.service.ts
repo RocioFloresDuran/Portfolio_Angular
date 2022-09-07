@@ -10,7 +10,7 @@ import { persona } from '../model/persona.model';
 export class PersonaService {
 
   url = 'http://localhost:8080/personas/';
-  // url2 = 'http://localhost:8080/domicilios/';
+  url2  = 'http://localhost:8080/domicilios/editar';
 
   constructor(private http:HttpClient) { }
 
@@ -18,8 +18,12 @@ export class PersonaService {
     return this.http.get<persona>(this.url + 2);
   }
 
-  // public getDomicilio(idDomicilio: number): Observable<domicilio>{
-  //   return this.http.get<domicilio>(this.url2 + idDomicilio);
-  // }
+  public editarPersona(persona: persona): Observable<any>{
+    return this.http.put<any>(this.url + 'editar', persona);
+  }
+
+  public editarDomicilio(domicilio: domicilio): Observable<any>{
+    return this.http.put<any>(this.url2, domicilio);
+  }
 
 }

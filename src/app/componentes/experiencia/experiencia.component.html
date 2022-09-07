@@ -14,6 +14,42 @@
               <h5 class="card-title">{{exp.nombre_org}}</h5>
               <p class="card-text"><span>{{exp.area_cargo}}</span></p>
               <p class="card-text"><small class="text-muted"> <span>{{exp.anio_inicio}} - {{exp.anio_fin}}</span></small></p>
+              
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#expModal" (click)="buscarExperiencia(exp.id || 0)">
+                  <i class="bi bi-pencil-fill"></i>
+              </button>
+        
+              <!-- Modal -->
+              <div class="modal fade" id="expModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Editar "Experiencia"</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form (ngSubmit)="onEditar()">
+                                <label>Institución</label>
+                                <input type="text" class="form-control" id="nombre_org" name="nombre_org" [(ngModel)] = "experiencia.nombre_org" required>
+                                <label>Área/Cargo</label>
+                                <input type="text" class="form-control" id="area_cargo" name="area_cargo" [(ngModel)] = "experiencia.area_cargo" required>
+                                <label>Año de inicio</label>
+                                <input type="text" class="form-control" id="anio_inicio" name="anio_inicio" [(ngModel)] = "experiencia.anio_inicio" required>
+                                <label>Año de finalización</label>
+                                <input type="text" class="form-control" id="anio_fin" name="anio_fin" [(ngModel)] = "experiencia.anio_fin" required>
+                                <label>URL de imagen</label>
+                                <textarea type="text" class="form-control" id="url_imagen" name="url_imagen" [(ngModel)] = "experiencia.url_imagen" required></textarea>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+              </div>
           </div>
         </div>
       </div>

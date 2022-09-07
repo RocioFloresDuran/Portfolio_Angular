@@ -8,12 +8,21 @@ import { experiencia } from '../model/experiencia.model';
 })
 export class ExperienciaService {
 
-  url = 'http://localhost:8080/personas/experiencia/ver'
+  url = 'http://localhost:8080/personas/experiencia/'
 
   constructor(private http: HttpClient) { }
 
   public getExperiencias(): Observable<experiencia[]>{
-    return this.http.get<experiencia[]>(this.url);
+    return this.http.get<experiencia[]>(this.url + 'ver');
   }
+
+  public getExperiencia(id:any): Observable<experiencia>{
+    return this.http.get<experiencia>(this.url + `${id}`);
+  }
+
+  public editarExperiencia(experiencia: experiencia): Observable<any>{
+    return this.http.put<any>(this.url + 'editar', experiencia);
+  }
+
 
 }

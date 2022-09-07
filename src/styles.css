@@ -46,20 +46,10 @@ footer{
 }
 
 #perfil{
-    width: 200px;
+    width: 250px;
     height: auto;
     margin-left: 20px;
     margin-top: -70px;
-}
-
-#banner{
-    height: 300px;
-    width: auto;
-}
-
-#portada{
-    justify-content: center;
-    background-image: url(./assets/img/banner.png);
 }
 
 h2{

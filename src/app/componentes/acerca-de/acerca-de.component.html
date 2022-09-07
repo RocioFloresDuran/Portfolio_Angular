@@ -1,11 +1,43 @@
-<div class="row">
+<section>
     
-    <div class="col"> 
-        <section>
+    <div class="row">
+    
+        <div class="col-10">
             <h2>Acerca de</h2>
             <!-- <p>Desarrolladora Web Full Stack. Estudiante de Licenciatura en Sistemas de Información</p> -->
-            <p>{{persona.ocupacion}}</p>
-        </section>
+            <p>{{persona.descripcion}}</p>
+        </div>
+        <div class="col-2">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="bi bi-pencil-fill"></i>
+            </button>
+  
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Editar "Acerca de..."</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form (ngSubmit)="onEditar()">
+                                <textarea type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)] = "persona.descripcion" required></textarea>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+
     </div>
 
-</div>
+</section>

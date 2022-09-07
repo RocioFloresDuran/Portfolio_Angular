@@ -1,0 +1,19 @@
+#trigger{
+    margin-top: 1em;
+    margin-right: 1em;
+    margin-left: 1em;
+}
+
+#portada{
+    width: auto;
+    height: 350px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+}
+
+#datosPersonales{
+    background-color: #0a192f;
+    color:#8892b0;
+    padding: 10px;
+}

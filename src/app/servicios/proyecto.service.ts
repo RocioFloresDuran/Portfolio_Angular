@@ -8,12 +8,20 @@ import { proyecto } from '../model/proyecto.model';
 })
 export class ProyectoService {
 
-url = 'http://localhost:8080/personas/proyecto/ver'
+url = 'http://localhost:8080/personas/proyecto/'
 
   constructor(private http: HttpClient) { }
 
   public getProyectos(): Observable<proyecto[]>{
-    return this.http.get<proyecto[]>(this.url);
+    return this.http.get<proyecto[]>(this.url + 'ver');
+  }
+
+  public getProyecto(id:any): Observable<proyecto>{
+    return this.http.get<proyecto>(this.url + `${id}`);
+  }
+
+  public editarProyecto(proyecto: proyecto): Observable<any>{
+    return this.http.put<any>(this.url + 'editar', proyecto);
   }
 
 }
