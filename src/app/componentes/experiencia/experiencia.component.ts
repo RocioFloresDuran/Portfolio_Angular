@@ -12,6 +12,12 @@ export class ExperienciaComponent implements OnInit {
 
   experiencias: experiencia[] = [];
   experiencia: experiencia = new experiencia('','',0,0,'');
+  nombreOrg: String = '';
+  areaCargo: String = '';
+  anioInicio: number = 0;
+  anioFin: number = 0;
+  urlImg: String = '';
+
 
   constructor(public experienciaService: ExperienciaService, private router: Router) { }
 
@@ -44,5 +50,19 @@ export class ExperienciaComponent implements OnInit {
           console.log(expId);
         })
     }
+
+  onAgregar():void{
+    const expe = new experiencia(this.nombreOrg,this.areaCargo,this.anioInicio,this.anioFin,this.urlImg);
+    this.experienciaService.agregarExperiencia(expe).subscribe(
+      data =>{
+        alert("Experiencia añadida");
+        this.router.navigate(['']);
+        this.cargarExperiencias();
+      }, err =>{
+        alert("Ocurrió un error");
+        this.router.navigate(['']);
+      }
+    )
+  }
 
 }

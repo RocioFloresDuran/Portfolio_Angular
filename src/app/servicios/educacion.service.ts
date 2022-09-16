@@ -9,6 +9,7 @@ import { educacion } from '../model/educacion.model';
 export class EducacionService {
 
   url = 'http://localhost:8080/personas/educacion/'
+  idPersona = '2'
 
   constructor(private http: HttpClient) { }
 
@@ -22,6 +23,10 @@ export class EducacionService {
 
   public editarEducacion(educacion: educacion): Observable<any>{
     return this.http.put<any>(this.url + 'editar', educacion);
+  }
+
+  public agregarEducacion(educacion: educacion): Observable<any>{
+    return this.http.post<any>(this.url + 'new/' + this.idPersona, educacion);
   }
 
 }

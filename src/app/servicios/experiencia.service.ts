@@ -9,6 +9,7 @@ import { experiencia } from '../model/experiencia.model';
 export class ExperienciaService {
 
   url = 'http://localhost:8080/personas/experiencia/'
+  idPersona = '2'
 
   constructor(private http: HttpClient) { }
 
@@ -22,6 +23,10 @@ export class ExperienciaService {
 
   public editarExperiencia(experiencia: experiencia): Observable<any>{
     return this.http.put<any>(this.url + 'editar', experiencia);
+  }
+
+  public agregarExperiencia(experiencia: experiencia): Observable<any>{
+    return this.http.post<any>(this.url + 'new/' + this.idPersona, experiencia);
   }
 
 

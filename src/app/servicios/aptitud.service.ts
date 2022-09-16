@@ -9,6 +9,7 @@ import { aptitud } from '../model/aptitud.model';
 export class AptitudService {
 
   url = 'http://localhost:8080/personas/aptitud/'
+  idPersona = '2'
 
   constructor(private http: HttpClient) { }
 
@@ -22,6 +23,10 @@ export class AptitudService {
 
   public editarAptitud(aptitud: aptitud): Observable<any>{
     return this.http.put<any>(this.url + 'editar', aptitud);
+  }
+
+  public agregarAptitud(aptitud: aptitud): Observable<any>{
+    return this.http.post<any>(this.url + 'new/' + this.idPersona, aptitud);
   }
 
 }

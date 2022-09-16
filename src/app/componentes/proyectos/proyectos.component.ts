@@ -12,6 +12,8 @@ export class ProyectosComponent implements OnInit {
 
   proyectos: proyecto[] = [];
   proyecto: proyecto = new proyecto('','');
+  nombre: string = '';
+  descripcion: string = '';
 
   constructor(public proyectoService: ProyectoService, private router: Router) { }
 
@@ -42,5 +44,18 @@ export class ProyectosComponent implements OnInit {
       })
   }
 
+  onAgregar(): void {
+    const proye = new proyecto(this.nombre, this.descripcion);
+    this.proyectoService.agregarProyecto(proye).subscribe(
+      data => {
+        alert("Proyecto añadido");
+        this.router.navigate(['']);
+        this.cargarProyectos();
+      }, err => {
+        alert("Ocurrió un error");
+        this.router.navigate(['']);
+      }
+    )
+  }
 
 }

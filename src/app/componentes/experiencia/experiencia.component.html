@@ -1,5 +1,45 @@
 <section>
-  <h2>Experiencia</h2>
+  <div class="row justify-content-md-left">
+    <div class="col-md-auto">
+      <h2>Experiencia</h2>
+    </div>
+    <div class="col-md-auto">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newExpModal">
+        <i class="bi bi-plus-lg"></i>
+      </button>
+    </div>
+  </div>
+<!-- Modal -->
+<div class="modal fade" id="newExpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Agregar Experiencia</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form (ngSubmit)="onAgregar()">
+                  <label>Institución</label>
+                  <input type="text" class="form-control" id="nombreOrg" name="nombreOrg" [(ngModel)] = "nombreOrg" required>
+                  <label>Área/Cargo</label>
+                  <input type="text" class="form-control" id="areaCargo" name="areaCargo" [(ngModel)] = "areaCargo" required>
+                  <label>Año de inicio</label>
+                  <input type="text" class="form-control" id="anioInicio" name="anioInicio" [(ngModel)] = "anioInicio" required>
+                  <label>Año de finalización</label>
+                  <input type="text" class="form-control" id="anioFin" name="anioFin" [(ngModel)] = "anioFin" required>
+                  <label>URL de imagen</label>
+                  <textarea type="text" class="form-control" id="urlImg" name="urlImg" [(ngModel)] = "urlImg" required></textarea>
+                  <div class="modal-footer">
+                      <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  </div>
+              </form>
+          </div>
+          
+      </div>
+  </div>
+</div>
             <!-- <h4> Instituto de Previsión Social de la Provincia de Corrientes</h4>
             <span>Área de Sistemas</span> <br>
             <span> 2018 - 2020</span> -->

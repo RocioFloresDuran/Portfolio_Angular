@@ -12,6 +12,8 @@ export class AptitudesComponent implements OnInit {
 
   aptitudes: aptitud[] = [];
   aptitud: aptitud = new aptitud('',0);
+  nombre: string = '';
+  porcentaje: number = 0;
 
   constructor(public aptitudService: AptitudService, private router: Router) { }
 
@@ -47,5 +49,18 @@ export class AptitudesComponent implements OnInit {
         })
     }
 
+  onAgregar(): void {
+    const apti = new aptitud(this.nombre, this.porcentaje);
+    this.aptitudService.agregarAptitud(apti).subscribe(
+      data => {
+        alert("Aptitud añadida");
+        this.router.navigate(['']);
+        this.cargarAptitudes();
+      }, err => {
+        alert("Ocurrió un error");
+        this.router.navigate(['']);
+      }
+    )
+  }
 
 }

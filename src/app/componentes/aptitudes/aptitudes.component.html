@@ -1,5 +1,39 @@
 <section>
-  <h2>Hard & Soft Skills</h2>
+  <div class="row justify-content-md-left">
+    <div class="col-md-auto">
+      <h2>Hard & Soft Skills</h2>
+    </div>
+    <div class="col-md-auto">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newAptModal">
+        <i class="bi bi-plus-lg"></i>
+      </button>
+    </div>
+  </div>
+<!-- Modal -->
+<div class="modal fade" id="newAptModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Agregar Aptitud</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form (ngSubmit)="onAgregar()">
+                  <label>Nombre Aptitud</label>
+                  <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)] = "nombre" required>
+                  <label>Porcentaje</label>
+                  <input type="text" class="form-control" id="porcentaje" name="porcentaje" [(ngModel)] = "porcentaje" required>
+                  <div class="modal-footer">
+                      <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  </div>
+              </form>
+          </div>
+          
+      </div>
+  </div>
+</div>
 
   <div class="row">
              

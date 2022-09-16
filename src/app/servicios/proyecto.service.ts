@@ -9,6 +9,7 @@ import { proyecto } from '../model/proyecto.model';
 export class ProyectoService {
 
 url = 'http://localhost:8080/personas/proyecto/'
+idPersona = '2'
 
   constructor(private http: HttpClient) { }
 
@@ -22,6 +23,10 @@ url = 'http://localhost:8080/personas/proyecto/'
 
   public editarProyecto(proyecto: proyecto): Observable<any>{
     return this.http.put<any>(this.url + 'editar', proyecto);
+  }
+
+  public agregarProyecto(proyecto: proyecto): Observable<any>{
+    return this.http.post<any>(this.url + 'new/' + this.idPersona, proyecto);
   }
 
 }

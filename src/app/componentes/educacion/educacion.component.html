@@ -1,8 +1,51 @@
 <section>
-    <h2>Educación</h2>
+  <div class="row justify-content-md-left">
+    <div class="col-md-auto">
+      <h2>Educación</h2>
             <!-- <h4>Universidad Nacional del Nordeste - Facultad de Cs. Exactas Naturales y Agrimensura</h4>
             <span>Licenciatura en Sistemas de Información</span> <br>
             <span>2010 - Actualidad</span> -->
+    </div>
+    <div class="col-md-auto">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newEducModal">
+        <i class="bi bi-plus-lg"></i>
+      </button>
+    </div>
+  </div>
+<!-- Modal -->
+<div class="modal fade" id="newEducModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Agregar Educación</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form (ngSubmit)="onAgregar()">
+                  <label>Institución</label>
+                  <input type="text" class="form-control" id="escuela" name="escuela" [(ngModel)] = "escuela" required>
+                  <label>Título</label>
+                  <input type="text" class="form-control" id="titulo" name="titulo" [(ngModel)] = "titulo" required>
+                  <label>Carrera</label>
+                  <input type="text" class="form-control" id="carrera" name="carrera" [(ngModel)] = "carrera" required>
+                  <label>Año de inicio</label>
+                  <input type="text" class="form-control" id="anioInicio" name="anioInicio" [(ngModel)] = "anioInicio" required>
+                  <label>Año de finalización</label>
+                  <input type="text" class="form-control" id="anioFin" name="anioFin" [(ngModel)] = "anioFin" required>
+                  <label>URL de imagen</label>
+                  <textarea type="text" class="form-control" id="urlImg" name="urlImg" [(ngModel)] = "urlImg" required></textarea>
+                  <div class="modal-footer">
+                      <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  </div>
+              </form>
+          </div>
+          
+      </div>
+  </div>
+</div>
+    
     <div *ngFor= "let educ of educaciones" let i = index>
         <div class="card mb-3">
             <div class="row g-0">
