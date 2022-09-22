@@ -32,37 +32,47 @@ export class ExperienciaComponent implements OnInit {
   }
   
   
-    onEditar():void{
-      this.experienciaService.editarExperiencia(this.experiencia).subscribe(
-          data => { 
-             this.router.navigate(['']);
-             this.cargarExperiencias();
-          }
-      )
-    
-     }
-
-     buscarExperiencia(expId:number):void{
-      this.experienciaService.getExperiencia(expId).subscribe(
-        data => {
-          this.experiencia = data;
-          console.log(JSON.stringify(this.experiencia) + 'buscar');
-          console.log(expId);
-        })
-    }
-
-  onAgregar():void{
-    const expe = new experiencia(this.nombreOrg,this.areaCargo,this.anioInicio,this.anioFin,this.urlImg);
-    this.experienciaService.agregarExperiencia(expe).subscribe(
-      data =>{
-        alert("Experiencia añadida");
-        this.router.navigate(['']);
+  onEditar(): void {
+    this.experienciaService.editarExperiencia(this.experiencia).subscribe(
+      data => {
         this.cargarExperiencias();
-      }, err =>{
+      }, err => {
         alert("Ocurrió un error");
         this.router.navigate(['']);
       }
     )
+  }
+
+  buscarExperiencia(expId: number): void {
+    this.experienciaService.getExperiencia(expId).subscribe(
+      data => {
+        this.experiencia = data;
+      })
+  }
+
+  onAgregar(): void {
+    const expe = new experiencia(this.nombreOrg, this.areaCargo, this.anioInicio, this.anioFin, this.urlImg);
+    this.experienciaService.agregarExperiencia(expe).subscribe(
+      data => {
+        this.cargarExperiencias();
+      }, err => {
+        alert("Ocurrió un error");
+        this.router.navigate(['']);
+      }
+    )
+  }
+
+  borrar(id: number) {
+    if (confirm('Seguro desea eliminar el elemento?')) {
+      this.experienciaService.borrarExperiencia(id).subscribe(
+        data => {
+          this.cargarExperiencias();
+        }, err => {
+          alert("Ocurrió un error");
+          this.router.navigate(['']);
+        }
+      )
+    }
   }
 
 }

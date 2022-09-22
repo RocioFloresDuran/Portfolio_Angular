@@ -29,4 +29,8 @@ export class AptitudService {
     return this.http.post<any>(this.url + 'new/' + this.idPersona, aptitud);
   }
 
+  public borrarAptitud(id:any): Observable<any>{
+    return this.http.delete<any>(this.url + 'delete/' + `${id}`);
+  }
+
 }

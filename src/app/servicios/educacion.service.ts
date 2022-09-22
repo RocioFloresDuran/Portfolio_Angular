@@ -29,4 +29,8 @@ export class EducacionService {
     return this.http.post<any>(this.url + 'new/' + this.idPersona, educacion);
   }
 
+  public borrarEducacion(id:any): Observable<any>{
+    return this.http.delete<any>(this.url + 'delete/' + `${id}`);
+  }
+
 }

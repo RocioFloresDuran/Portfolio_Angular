@@ -25,22 +25,22 @@ export class ProyectosComponent implements OnInit {
     this.proyectoService.getProyectos().subscribe(data => {this.proyectos = data});
   }
   
-  
-  onEditar():void{
+
+  onEditar(): void {
     this.proyectoService.editarProyecto(this.proyecto).subscribe(
-      data => { 
-        this.router.navigate(['']);
+      data => {
         this.cargarProyectos();
+      }, err => {
+        alert("Ocurrió un error");
+        this.router.navigate(['']);
       }
-    )  
+    )
   }
 
-  buscarProyecto(proyId:number):void{
+  buscarProyecto(proyId: number): void {
     this.proyectoService.getProyecto(proyId).subscribe(
       data => {
         this.proyecto = data;
-        console.log(JSON.stringify(this.proyecto) + 'buscar');
-        console.log(proyId);
       })
   }
 
@@ -48,14 +48,25 @@ export class ProyectosComponent implements OnInit {
     const proye = new proyecto(this.nombre, this.descripcion);
     this.proyectoService.agregarProyecto(proye).subscribe(
       data => {
-        alert("Proyecto añadido");
-        this.router.navigate(['']);
         this.cargarProyectos();
       }, err => {
         alert("Ocurrió un error");
         this.router.navigate(['']);
       }
     )
+  }
+
+  borrar(id: number) {
+    if (confirm('Seguro desea eliminar el elemento?')) {
+      this.proyectoService.borrarProyecto(id).subscribe(
+        data => {
+          this.cargarProyectos();
+        }, err => {
+          alert("Ocurrió un error");
+          this.router.navigate(['']);
+        }
+      )
+    }
   }
 
 }

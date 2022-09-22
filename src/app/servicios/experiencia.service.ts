@@ -29,5 +29,9 @@ export class ExperienciaService {
     return this.http.post<any>(this.url + 'new/' + this.idPersona, experiencia);
   }
 
+  public borrarExperiencia(id:any): Observable<any>{
+    return this.http.delete<any>(this.url + 'delete/' + `${id}`);
+  }
+
 
 }

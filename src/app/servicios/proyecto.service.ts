@@ -29,4 +29,8 @@ idPersona = '2'
     return this.http.post<any>(this.url + 'new/' + this.idPersona, proyecto);
   }
 
+  public borrarProyecto(id:any): Observable<any>{
+    return this.http.delete<any>(this.url + 'delete/' + `${id}`);
+  }
+
 }

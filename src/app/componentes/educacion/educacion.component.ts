@@ -35,8 +35,10 @@ export class EducacionComponent implements OnInit {
   onEditar(): void {
     this.educacionService.editarEducacion(this.educacion).subscribe(
       data => {
-        this.router.navigate(['']);
         this.cargarEducaciones();
+      }, err => {
+        alert("Ocurrió un error");
+        this.router.navigate(['']);
       }
     )
 
@@ -46,8 +48,6 @@ export class EducacionComponent implements OnInit {
     this.educacionService.getEducacion(educId).subscribe(
       data => {
         this.educacion = data;
-        console.log(JSON.stringify(this.educacion) + 'buscar');
-        console.log(educId);
       })
   }
 
@@ -55,14 +55,25 @@ export class EducacionComponent implements OnInit {
     const educ = new educacion(this.escuela, this.titulo, this.carrera, this.anioInicio, this.anioFin, this.urlImg);
     this.educacionService.agregarEducacion(educ).subscribe(
       data => {
-        alert("Educación añadida");
-        this.router.navigate(['']);
         this.cargarEducaciones();
       }, err => {
         alert("Ocurrió un error");
         this.router.navigate(['']);
       }
     )
+  }
+
+  borrar(id: number) {
+    if (confirm('Seguro desea eliminar el elemento?')) {
+      this.educacionService.borrarEducacion(id).subscribe(
+        data => {
+          this.cargarEducaciones();
+        }, err => {
+          alert("Ocurrió un error");
+          this.router.navigate(['']);
+        }
+      )
+    }
   }
 
 }

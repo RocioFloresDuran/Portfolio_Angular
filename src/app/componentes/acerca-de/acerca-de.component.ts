@@ -26,11 +26,15 @@ export class AcercaDeComponent implements OnInit {
     this.personaService.getPersona().subscribe(data => {this.persona = data});
   }
 
-  onEditar():void{
+  onEditar(): void {
     this.personaService.editarPersona(this.persona).subscribe(
       data => {
-          this.router.navigate([''])
-    })
+        this.router.navigate([''])
+      }, err => {
+        alert("Ocurrió un error");
+        this.router.navigate(['']);
+      }
+    )
   }
 
 }

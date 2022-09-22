@@ -23,44 +23,53 @@ export class AptitudesComponent implements OnInit {
     
   }
 
-  // elseBlock = null;
-
   cargarAptitudes():void{
     this.aptitudService.getAptitudes().subscribe(data => {this.aptitudes = data});
   }
   
   
-  onEditar():void{
+  onEditar(): void {
     this.aptitudService.editarAptitud(this.aptitud).subscribe(
-          data => { 
-             this.router.navigate(['']);
-             this.cargarAptitudes();
-          }
-      )
-    
-  }
-
-  buscarAptitud(aptId:number):void{
-    this.aptitudService.getAptitud(aptId).subscribe(
-        data => {
-          this.aptitud = data;
-          console.log(JSON.stringify(this.aptitud) + 'buscar');
-          console.log(aptId);
-        })
-    }
-
-  onAgregar(): void {
-    const apti = new aptitud(this.nombre, this.porcentaje);
-    this.aptitudService.agregarAptitud(apti).subscribe(
       data => {
-        alert("Aptitud añadida");
-        this.router.navigate(['']);
         this.cargarAptitudes();
       }, err => {
         alert("Ocurrió un error");
         this.router.navigate(['']);
       }
     )
+
+  }
+
+  buscarAptitud(aptId: number): void {
+    this.aptitudService.getAptitud(aptId).subscribe(
+      data => {
+        this.aptitud = data;
+      })
+  }
+
+  onAgregar(): void {
+    const apti = new aptitud(this.nombre, this.porcentaje);
+    this.aptitudService.agregarAptitud(apti).subscribe(
+      data => {
+        this.cargarAptitudes();
+      }, err => {
+        alert("Ocurrió un error");
+        this.router.navigate(['']);
+      }
+    )
+  }
+
+  borrar(id: number) {
+    if (confirm('Seguro desea eliminar el elemento?')) {
+      this.aptitudService.borrarAptitud(id).subscribe(
+        data => {
+          this.cargarAptitudes();
+        }, err => {
+          alert("Ocurrió un error");
+          this.router.navigate(['']);
+        }
+      )
+    }
   }
 
 }

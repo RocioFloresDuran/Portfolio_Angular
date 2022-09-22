@@ -47,7 +47,7 @@
     <div class="card mb-3">
       <div class="row g-0">
         <div class="col-md-2">
-          <img src={{exp.url_imagen}} class="img-fluid" alt="banner" id="experiencia">
+          <img src={{exp.url_imagen}} class="img-fluid" alt="Imagen" id="experiencia">
         </div>
         <div class="col-md-8">
           <div class="card-body">
@@ -90,6 +90,11 @@
                     </div>
                 </div>
               </div>
+
+              <button type="button" class="btn btn-secondary" (click)="borrar(exp.id || 0)">
+                <i class="bi bi-trash3-fill"></i>
+              </button> 
+
           </div>
         </div>
       </div>

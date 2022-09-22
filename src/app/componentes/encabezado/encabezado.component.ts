@@ -22,24 +22,28 @@ export class EncabezadoComponent implements OnInit {
 
   }
 
-    cargarPersona():void{
-      this.personaService.getPersona().subscribe(data => {this.persona = data});
-    }
+  cargarPersona(): void {
+    this.personaService.getPersona().subscribe(data => { this.persona = data });
+  }
 
-    editarDomicilio():void{
-      this.personaService.editarDomicilio(this.persona.domicilio).subscribe(
-        data => {
-          this.router.navigate(['']);
-        }
-      )
-    }
+  editarDomicilio(): void {
+    this.personaService.editarDomicilio(this.persona.domicilio).subscribe(
+      data => {
+        this.router.navigate(['']);
+      }
+    )
+  }
   
-    onEditar():void{
-      this.editarDomicilio();
-      this.personaService.editarPersona(this.persona).subscribe(
-        data => {
-            this.router.navigate([''])
-      })
-    }
+  onEditar(): void {
+    this.editarDomicilio();
+    this.personaService.editarPersona(this.persona).subscribe(
+      data => {
+        this.router.navigate([''])
+      }, err => {
+        alert("Ocurrió un error");
+        this.router.navigate(['']);
+      }
+    )
+  }
   }
 
