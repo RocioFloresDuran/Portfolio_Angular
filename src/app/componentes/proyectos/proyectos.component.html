@@ -9,7 +9,7 @@
         </div>
         <div class="col-md-auto">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newProyModal">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newProyModal" *ngIf="isLogged">
                 <i class="bi bi-plus-lg"></i>
             </button>
         </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-2"> 
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#proyecModal" (click)="buscarProyecto(proy.id!)">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#proyecModal" (click)="buscarProyecto(proy.id!)" *ngIf="isLogged">
                         <i class="bi bi-pencil-fill"></i>
                     </button>
                      
@@ -76,7 +76,7 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-secondary" (click)="borrar(proy.id || 0)">
+                    <button type="button" class="btn btn-secondary" (click)="borrar(proy.id || 0)" *ngIf="isLogged">
                         <i class="bi bi-trash3-fill"></i>
                     </button> 
                   

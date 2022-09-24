@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { proyecto } from 'src/app/model/proyecto.model';
+import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 import { ProyectoService } from 'src/app/servicios/proyecto.service';
 
 @Component({
@@ -15,10 +16,16 @@ export class ProyectosComponent implements OnInit {
   nombre: string = '';
   descripcion: string = '';
 
-  constructor(public proyectoService: ProyectoService, private router: Router) { }
+  public isLogged: boolean;
+
+
+  constructor(public proyectoService: ProyectoService, private router: Router, public autenticacionService: AutenticacionService) {
+    this.isLogged = false;
+   }
 
   ngOnInit(): void {
     this.cargarProyectos(); 
+    this.isLogged = this.autenticacionService.usuarioLogueado();
   }
 
   cargarProyectos():void{

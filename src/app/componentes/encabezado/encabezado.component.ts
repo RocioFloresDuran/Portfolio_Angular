@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { domicilio } from 'src/app/model/domicilio.model';
 import { persona } from 'src/app/model/persona.model';
+import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 import { PersonaService } from 'src/app/servicios/persona.service';
 
 @Component({
@@ -12,13 +13,17 @@ import { PersonaService } from 'src/app/servicios/persona.service';
 export class EncabezadoComponent implements OnInit {
 
   persona: persona = new persona('','',new Date(),'','','','','','', new domicilio('',''));
+  public isLogged: boolean;
   
 
-  constructor(public personaService: PersonaService, private router: Router) { }
+  constructor(public personaService: PersonaService, private router: Router, public autenticacionService: AutenticacionService) { 
+    this.isLogged = false;
+   }
 
   ngOnInit(): void {
 
     this.cargarPersona();
+    this.isLogged = this.autenticacionService.usuarioLogueado();
 
   }
 
@@ -45,5 +50,18 @@ export class EncabezadoComponent implements OnInit {
       }
     )
   }
+
+  onClick(){
+    this.autenticacionService.logout()
+    .then(() =>{
+      localStorage.removeItem('user');
+      window.location.reload();
+    })
+    .catch(error => console.log(error))
   }
+
+}
+
+  
+
 

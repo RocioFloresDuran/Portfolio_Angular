@@ -10,12 +10,17 @@
 
                 <img src="./assets/img/ArgProg3.png" class="" alt="Logo Argentina Programa" id="logo">
 
+                
        
                 <img src="./assets/img/icons8-facebook-48.png" class="redes float-end" alt="">
            
                 <img src="./assets/img/icons8-instagram-48.png" class="redes float-end" alt="">
          
                 <img src="./assets/img/icons8-linkedin-48.png" class="redes float-end" alt="">
+
+                <button class="btn btn-danger float-end" id="logout" (click)="onClick()" *ngIf="isLogged">Cerrar Sesión</button>
+
+                <button class="btn btn-success float-end" id="login" routerLink="/iniciar-sesion"  *ngIf="!isLogged">Iniciar Sesión</button>
 
             </div>
 
@@ -26,7 +31,7 @@
              
             <!-- Button trigger modal -->
             <div class="col-2">
-                <button type="button" id="trigger"class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalBanner">
+                <button type="button" id="trigger"class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalBanner" *ngIf="isLogged">
                 <i class="bi bi-pencil-fill"></i>
                 </button>
             </div>
@@ -60,7 +65,7 @@
             </div>
                 <!-- Button trigger modal -->
             <div class="col-2">
-                <button type="button" id="trigger" class="btn btn-secondary float-end" data-bs-toggle="modal" data-bs-target="#modalPerfil">
+                <button type="button" id="trigger" class="btn btn-secondary float-end" data-bs-toggle="modal" data-bs-target="#modalPerfil" *ngIf="isLogged">
                     <i class="bi bi-pencil-fill"></i>
                 </button>
             </div>
@@ -96,7 +101,7 @@
                     
                 <!-- Button trigger modal -->
             
-                <button type="button" id="trigger" class="btn btn-secondary float-center" data-bs-toggle="modal" data-bs-target="#modalDatosPersonales">
+                <button type="button" id="trigger" class="btn btn-secondary float-center" data-bs-toggle="modal" data-bs-target="#modalDatosPersonales" *ngIf="isLogged">
                     <i class="bi bi-pencil-fill"></i>
                 </button>
             

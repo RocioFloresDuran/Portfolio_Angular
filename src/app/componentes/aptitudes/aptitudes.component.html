@@ -5,7 +5,7 @@
     </div>
     <div class="col-md-auto">
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newAptModal">
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newAptModal" *ngIf="isLogged">
         <i class="bi bi-plus-lg"></i>
       </button>
     </div>
@@ -45,12 +45,12 @@
           <label>{{apt.nombre}}</label>
           <span class="rating-count pull-right"> {{apt.porcentaje}}%</span>
 
-          <button type="button" class="btn btn-secondary float-end" (click)="borrar(apt.id || 0)">
+          <button type="button" class="btn btn-secondary float-end" (click)="borrar(apt.id || 0)" *ngIf="isLogged">
             <i class="bi bi-trash3-fill"></i>
           </button> 
           
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-secondary float-end" data-bs-toggle="modal" data-bs-target="#aptModal" (click)="buscarAptitud(apt.id!)">
+          <button type="button" class="btn btn-secondary float-end" data-bs-toggle="modal" data-bs-target="#aptModal" (click)="buscarAptitud(apt.id!)" *ngIf="isLogged">
             <i class="bi bi-pencil-fill"></i>
           </button>
 

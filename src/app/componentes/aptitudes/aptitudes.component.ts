@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { aptitud } from 'src/app/model/aptitud.model';
 import { AptitudService } from 'src/app/servicios/aptitud.service';
+import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 
 @Component({
   selector: 'app-aptitudes',
@@ -15,11 +16,16 @@ export class AptitudesComponent implements OnInit {
   nombre: string = '';
   porcentaje: number = 0;
 
-  constructor(public aptitudService: AptitudService, private router: Router) { }
+  public isLogged: boolean;
+
+  constructor(public aptitudService: AptitudService, private router: Router, public autenticacionService: AutenticacionService) {
+    this.isLogged = false;
+   }
 
   ngOnInit(): void {
 
     this.cargarAptitudes();
+    this.isLogged = this.autenticacionService.usuarioLogueado();
     
   }
 

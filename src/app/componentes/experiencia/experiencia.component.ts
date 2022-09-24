@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { experiencia } from 'src/app/model/experiencia.model';
+import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 import { ExperienciaService } from 'src/app/servicios/experiencia.service';
 
 @Component({
@@ -18,12 +19,17 @@ export class ExperienciaComponent implements OnInit {
   anioFin: number = 0;
   urlImg: String = '';
 
+  public isLogged: boolean;
 
-  constructor(public experienciaService: ExperienciaService, private router: Router) { }
+
+  constructor(public experienciaService: ExperienciaService, private router: Router, public autenticacionService: AutenticacionService) {
+    this.isLogged = false;
+   }
 
   ngOnInit(): void {
 
     this.cargarExperiencias();
+    this.isLogged = this.autenticacionService.usuarioLogueado();
   
   }
 

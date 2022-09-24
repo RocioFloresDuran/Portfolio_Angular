@@ -58,6 +58,11 @@ h2{
     font:bold;
 }
 
+#logout, #login{
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
 /*--------------- Barras de progreso para Skills----------------------- */
 
 

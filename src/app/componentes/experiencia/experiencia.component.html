@@ -5,7 +5,7 @@
     </div>
     <div class="col-md-auto">
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newExpModal">
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newExpModal"  *ngIf="isLogged">
         <i class="bi bi-plus-lg"></i>
       </button>
     </div>
@@ -56,7 +56,7 @@
               <p class="card-text"><small class="text-muted"> <span>{{exp.anio_inicio}} - {{exp.anio_fin}}</span></small></p>
               
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#expModal" (click)="buscarExperiencia(exp.id || 0)">
+              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#expModal" (click)="buscarExperiencia(exp.id || 0)" *ngIf="isLogged">
                   <i class="bi bi-pencil-fill"></i>
               </button>
         
@@ -91,7 +91,7 @@
                 </div>
               </div>
 
-              <button type="button" class="btn btn-secondary" (click)="borrar(exp.id || 0)">
+              <button type="button" class="btn btn-secondary" (click)="borrar(exp.id || 0)" *ngIf="isLogged">
                 <i class="bi bi-trash3-fill"></i>
               </button> 
 

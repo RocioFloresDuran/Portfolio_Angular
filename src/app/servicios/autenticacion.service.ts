@@ -1,32 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Auth, signInWithEmailAndPassword, signOut} from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AutenticacionService {
 
-  url = '';
-  currentUserSubject: BehaviorSubject<any>;
-
-  constructor(private http:HttpClient) {
-
-    console.log("El servicio de autenticación está corriendo");
-
-    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser')||'{}'))
-
-   }
+  constructor(private auth: Auth) {}
 
 
-   IniciarSesion(credenciales:any):Observable<any>{
-    return this.http.post(this.url, credenciales).pipe(map(data =>{
-      
-      sessionStorage.setItem('currentUser', JSON.stringify(data));
+  login({ email, password }: any) {
+    return signInWithEmailAndPassword(this.auth, email, password);
+  }
 
-      return data;
-    }))
-   }
+  
+
+  logout(){
+    return signOut(this.auth);
+  }
+
+  usuarioLogueado() {
+    if (localStorage.getItem('user') != null) {
+      console.log(JSON.parse(localStorage.getItem('user')!) + ' ESTÁ LOGGED');
+      return true;
+    } else {
+      console.log(JSON.parse(localStorage.getItem('user')!) + ' NO Está LOGGED :(((')
+      return false;
+    }
+  }
 
 }

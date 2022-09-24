@@ -10,12 +10,13 @@ import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 })
 export class IniciarSesionComponent implements OnInit {
   formLogin: FormGroup;
+  user: any;
 
   constructor(private formBuilder:FormBuilder, private autenticacionService: AutenticacionService, private ruta:Router) { 
     this.formLogin = this.formBuilder.group({
       
       email:['',[Validators.required, Validators.email]],
-      contraseña:['',[Validators.required, Validators.minLength(8)]]
+      password:['',[Validators.required, Validators.minLength(6)]]
 
     })
   }
@@ -28,16 +29,16 @@ export class IniciarSesionComponent implements OnInit {
   }
 
   get Password(){
-    return this.formLogin.get('contraseña');
+    return this.formLogin.get('password');
   }
 
-  onEnviar(event:Event){
-    event.preventDefault;
-    this.autenticacionService.IniciarSesion(this.formLogin.value).subscribe(data =>{
-      console.log("DATA:", JSON.stringify(data));
-      this.ruta.navigate(['/portfolio'])
+  onEnviar(){
+    this.autenticacionService.login(this.formLogin.value)
+    .then(response =>{
+      this.user = response;
+      localStorage.setItem('user', JSON.stringify(this.user));
+      this.ruta.navigate(['']);
     })
-
+    .catch(error => console.log(error));
   }
-
 }
