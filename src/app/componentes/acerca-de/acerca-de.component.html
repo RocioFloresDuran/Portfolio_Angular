@@ -9,7 +9,7 @@
         </div>
         <div class="col-md-auto">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="isLogged">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" *ngIf="isLogged" (click)="cargarForm()">
                 <i class="bi bi-pencil-fill"></i>
             </button>
   
@@ -22,11 +22,20 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form (ngSubmit)="onEditar()">
-                                <textarea type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)] = "persona.descripcion" required></textarea>
+                            <form [formGroup]="form" (ngSubmit)="onEditar($event)">
+                                <textarea type="text" class="form-control" formControlName="descripcion"
+                                 id="descripcion" name="descripcion" required
+                                [ngClass]="{'is-invalid': Descripcion?.errors  && Descripcion?.touched, 'is-valid': !Descripcion?.errors  && Descripcion?.touched}">
+                                </textarea>
+                                <div *ngIf="Descripcion?.errors  && Descripcion?.touched">    
+                                    <p class="text-danger">
+                                        El campo no debe estar vacío
+                                    </p>
+                                </div>
+                                
                                 <div class="modal-footer">
-                                    <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal" [disabled]="form.invalid">Guardar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="form.reset()">Close</button>
                                 </div>
                             </form>
                         </div>

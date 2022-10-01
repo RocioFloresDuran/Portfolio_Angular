@@ -5,7 +5,7 @@
     </div>
     <div class="col-md-auto">
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newAptModal" *ngIf="isLogged">
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newAptModal" *ngIf="isLogged" (click)="formEdit.reset()">
         <i class="bi bi-plus-lg"></i>
       </button>
     </div>
@@ -19,14 +19,31 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <form (ngSubmit)="onAgregar()">
-                  <label>Nombre Aptitud</label>
-                  <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)] = "nombre" required>
+              <form [formGroup]="formEdit" (ngSubmit)="onAgregar($event)">
+                  <label>Nombre de Skill</label>
+                  <input type="text" class="form-control" formControlName="nombre" id="nombre" name="nombre"required
+                  [ngClass]="{'is-invalid': Nombre?.errors  && Nombre?.touched, 'is-valid': !Nombre?.errors  && Nombre?.touched}">
+                  <div *ngIf="Nombre?.errors  && Nombre?.touched">
+                    <p class="text-danger">
+                      El campo es obligatorio
+                    </p>
+                  </div>
+
                   <label>Porcentaje</label>
-                  <input type="text" class="form-control" id="porcentaje" name="porcentaje" [(ngModel)] = "porcentaje" required>
+                  <input type="number" class="form-control" formControlName="porcentaje" id="porcentaje" name="porcentaje" required
+                  [ngClass]="{'is-invalid': Porcentaje?.errors  && Porcentaje?.touched, 'is-valid': !Porcentaje?.errors  && Porcentaje?.touched}">
+                  <div *ngIf="Porcentaje?.errors  && Porcentaje?.touched">
+                    <p *ngIf="Porcentaje?.hasError('required')" class="text-danger">
+                      El campo es obligatorio
+                    </p>
+                    <p *ngIf="Porcentaje?.hasError('min') || Porcentaje?.hasError('max')" class="text-danger">
+                      El porcentaje no es válido.
+                    </p>
+                  </div>
+
                   <div class="modal-footer">
-                      <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <button class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formEdit.invalid">Guardar</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="formEdit.reset()">Cerrar</button>
                   </div>
               </form>
           </div>
@@ -72,14 +89,30 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form (ngSubmit)="onEditar()">
+                <form [formGroup]="formEdit" (ngSubmit)="onEditar($event)">
                   <label>Nombre de Skill</label>
-                  <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)] = "aptitud.nombre" required>
+                  <input type="text" class="form-control" formControlName="nombre" id="nombre" name="nombre"required
+                  [ngClass]="{'is-invalid': Nombre?.errors  && Nombre?.touched, 'is-valid': !Nombre?.errors  && Nombre?.touched}">
+                  <div *ngIf="Nombre?.errors  && Nombre?.touched">
+                    <p class="text-danger">
+                      El campo es obligatorio
+                    </p>
+                  </div>
+
                   <label>Porcentaje</label>
-                  <input type="text" class="form-control" id="porcentaje" name="porcentaje" [(ngModel)] = "aptitud.porcentaje" required>
+                  <input type="number" class="form-control" formControlName="porcentaje" id="porcentaje" name="porcentaje" required
+                  [ngClass]="{'is-invalid': Porcentaje?.errors  && Porcentaje?.touched, 'is-valid': !Porcentaje?.errors  && Porcentaje?.touched}">
+                  <div *ngIf="Porcentaje?.errors  && Porcentaje?.touched">
+                    <p *ngIf="Porcentaje?.hasError('required')" class="text-danger">
+                      El campo es obligatorio
+                    </p>
+                    <p *ngIf="Porcentaje?.hasError('min') || Porcentaje?.hasError('max')" class="text-danger">
+                      El porcentaje no es válido.
+                    </p>
+                  </div>
                   <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formEdit.invalid">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="formEdit.reset()">Cerrar</button>
                   </div>
                 </form>
               </div>

@@ -2,13 +2,10 @@
   <div class="row justify-content-md-left">
     <div class="col-md-auto">
       <h2>Educación</h2>
-            <!-- <h4>Universidad Nacional del Nordeste - Facultad de Cs. Exactas Naturales y Agrimensura</h4>
-            <span>Licenciatura en Sistemas de Información</span> <br>
-            <span>2010 - Actualidad</span> -->
     </div>
     <div class="col-md-auto">
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newEducModal" *ngIf="isLogged">
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newEducModal" *ngIf="isLogged" (click)="formEdit.reset()">
         <i class="bi bi-plus-lg"></i>
       </button>
     </div>
@@ -22,22 +19,71 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <form (ngSubmit)="onAgregar()">
+              <form [formGroup]="formEdit" (ngSubmit)="onAgregar($event)">
                   <label>Institución</label>
-                  <input type="text" class="form-control" id="escuela" name="escuela" [(ngModel)] = "escuela" required>
+                  <input type="text" class="form-control" formControlName="escuela" id="escuela" name="escuela" required
+                  [ngClass]="{'is-invalid': Escuela?.errors  && Escuela?.touched, 'is-valid': !Escuela?.errors  && Escuela?.touched}">
+                  <div *ngIf="Escuela?.errors  && Escuela?.touched">
+                    <p class="text-danger">
+                      El campo es obligatorio
+                    </p>
+                  </div>
+
                   <label>Título</label>
-                  <input type="text" class="form-control" id="titulo" name="titulo" [(ngModel)] = "titulo" required>
+                  <input type="text" class="form-control" formControlName="titulo" id="titulo" name="titulo" required
+                  [ngClass]="{'is-invalid': Titulo?.errors  && Titulo?.touched, 'is-valid': !Titulo?.errors  && Titulo?.touched}">
+                  <div *ngIf="Titulo?.errors  && Titulo?.touched">
+                    <p class="text-danger">
+                      El campo es obligatorio
+                    </p>
+                  </div>
+
                   <label>Carrera</label>
-                  <input type="text" class="form-control" id="carrera" name="carrera" [(ngModel)] = "carrera" required>
+                  <input type="text" class="form-control" formControlName="carrera" id="carrera" name="carrera" required
+                  [ngClass]="{'is-invalid': Carrera?.errors  && Carrera?.touched, 'is-valid': !Carrera?.errors  && Carrera?.touched}">
+                  <div *ngIf="Carrera?.errors  && Carrera?.touched">
+                    <p class="text-danger">
+                      El campo es obligatorio
+                    </p>
+                  </div>
+
                   <label>Año de inicio</label>
-                  <input type="text" class="form-control" id="anioInicio" name="anioInicio" [(ngModel)] = "anioInicio" required>
-                  <label>Año de finalización</label>
-                  <input type="text" class="form-control" id="anioFin" name="anioFin" [(ngModel)] = "anioFin" required>
+                  <input type="number" class="form-control" formControlName="anio_inicio" id="anioInicio" name="anioInicio" required
+                    [ngClass]="{'is-invalid': Anio_inicio?.errors  && Anio_inicio?.touched, 'is-valid': !Anio_inicio?.errors  && Anio_inicio?.touched}">
+                  <div *ngIf="Anio_inicio?.errors  && Anio_inicio?.touched">
+                    <p *ngIf="Anio_inicio?.hasError('required')" class="text-danger">
+                      El campo es obligatorio
+                    </p>
+                    <p *ngIf="Anio_inicio?.hasError('min') || Anio_inicio?.hasError('max')" class="text-danger">
+                      El año no es válido.
+                    </p>
+                  </div>
+
+
+                  <label>Año de finalización (Opcional)</label>
+                  <input type="number" class="form-control" formControlName="anio_fin" id="anioFin" name="anioFin"
+                    [ngClass]="{'is-invalid': Anio_fin?.errors  && Anio_fin?.touched, 'is-valid': !Anio_fin?.errors  && Anio_fin?.touched}">
+                  <div *ngIf="Anio_fin?.errors  && Anio_fin?.touched">
+                    <p class="text-danger">
+                      El año no es válido.
+                    </p>
+                  </div>
+
+
                   <label>URL de imagen</label>
-                  <textarea type="text" class="form-control" id="urlImg" name="urlImg" [(ngModel)] = "urlImg" required></textarea>
+                  <textarea type="text" class="form-control" formControlName="url_imagen" id="urlImg" name="urlImg" required
+                    [ngClass]="{'is-invalid': Url_imagen?.errors  && Url_imagen?.touched, 'is-valid': !Url_imagen?.errors  && Url_imagen?.touched}">
+                  </textarea>
+                  <div *ngIf="Url_imagen?.errors  && Url_imagen?.touched">
+                    <p class="text-danger">
+                      El campo es obligatorio
+                    </p>
+                  </div>
+
+
                   <div class="modal-footer">
-                      <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <button class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formEdit.invalid">Guardar</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="formEdit.reset()">Cerrar</button>
                   </div>
               </form>
           </div>
@@ -72,26 +118,74 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
-                            <form (ngSubmit)="onEditar()">
+                            <form [formGroup]="formEdit" (ngSubmit)="onEditar($event)">
                               <label>Institución</label>
-                              <input type="text" class="form-control" id="escuela" name="escuela" [(ngModel)] = "educacion.escuela" required>
+                              <input type="text" class="form-control" formControlName="escuela" id="escuela" name="escuela" required
+                                [ngClass]="{'is-invalid': Escuela?.errors  && Escuela?.touched, 'is-valid': !Escuela?.errors  && Escuela?.touched}">
+                              <div *ngIf="Escuela?.errors  && Escuela?.touched">
+                                <p class="text-danger">
+                                  El campo es obligatorio
+                                </p>
+                              </div>
+                    
                               <label>Título</label>
-                              <input type="text" class="form-control" id="titulo" name="titulo" [(ngModel)] = "educacion.titulo" required>
+                              <input type="text" class="form-control" formControlName="titulo" id="titulo" name="titulo" required
+                                [ngClass]="{'is-invalid': Titulo?.errors  && Titulo?.touched, 'is-valid': !Titulo?.errors  && Titulo?.touched}">
+                              <div *ngIf="Titulo?.errors  && Titulo?.touched">
+                                <p class="text-danger">
+                                  El campo es obligatorio
+                                </p>
+                              </div>
+                    
                               <label>Carrera</label>
-                              <input type="text" class="form-control" id="carrera" name="carrera" [(ngModel)] = "educacion.carrera" required>
+                              <input type="text" class="form-control" formControlName="carrera" id="carrera" name="carrera" required
+                                [ngClass]="{'is-invalid': Carrera?.errors  && Carrera?.touched, 'is-valid': !Carrera?.errors  && Carrera?.touched}">
+                              <div *ngIf="Carrera?.errors  && Carrera?.touched">
+                                <p class="text-danger">
+                                  El campo es obligatorio
+                                </p>
+                              </div>
+                    
                               <label>Año de inicio</label>
-                              <input type="text" class="form-control" id="anio_inicio" name="anio_inicio" [(ngModel)] = "educacion.anio_inicio" required>
-                              <label>Año de finalización</label>
-                              <input type="text" class="form-control" id="anio_fin" name="anio_fin" [(ngModel)] = "educacion.anio_fin" required>
+                              <input type="number" class="form-control" formControlName="anio_inicio" id="anioInicio" name="anioInicio"
+                                required
+                                [ngClass]="{'is-invalid': Anio_inicio?.errors  && Anio_inicio?.touched, 'is-valid': !Anio_inicio?.errors  && Anio_inicio?.touched}">
+                              <div *ngIf="Anio_inicio?.errors  && Anio_inicio?.touched">
+                                <p *ngIf="Anio_inicio?.hasError('required')" class="text-danger">
+                                  El campo es obligatorio
+                                </p>
+                                <p *ngIf="Anio_inicio?.hasError('min') || Anio_inicio?.hasError('max')" class="text-danger">
+                                  El año no es válido.
+                                </p>
+                              </div>
+                    
+                    
+                              <label>Año de finalización (Opcional)</label>
+                              <input type="number" class="form-control" formControlName="anio_fin" id="anioFin" name="anioFin"
+                                [ngClass]="{'is-invalid': Anio_fin?.errors  && Anio_fin?.touched, 'is-valid': !Anio_fin?.errors  && Anio_fin?.touched}">
+                              <div *ngIf="Anio_fin?.errors  && Anio_fin?.touched">
+                                <p class="text-danger">
+                                  El año no es válido.
+                                </p>
+                              </div>
+                    
+                    
                               <label>URL de imagen</label>
-                              <textarea type="text" class="form-control" id="url_imagen" name="url_imagen" [(ngModel)] = "educacion.url_imagen" required></textarea>
+                              <textarea type="text" class="form-control" formControlName="url_imagen" id="urlImg" name="urlImg" required
+                                [ngClass]="{'is-invalid': Url_imagen?.errors  && Url_imagen?.touched, 'is-valid': !Url_imagen?.errors  && Url_imagen?.touched}">
+                                                                  </textarea>
+                              <div *ngIf="Url_imagen?.errors  && Url_imagen?.touched">
+                                <p class="text-danger">
+                                  El campo es obligatorio
+                                </p>
+                              </div>
+                    
                               <div class="modal-footer">
-                                <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formEdit.invalid">Guardar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="formEdit.reset()">Cerrar</button>
                               </div>
                             </form>
-                          </div>
-                      
+                          </div>    
                         </div>
                       </div>
                     </div>
@@ -99,7 +193,6 @@
                     <button type="button" class="btn btn-secondary" (click)="borrar(educ.id || 0)" *ngIf="isLogged">
                       <i class="bi bi-trash3-fill"></i>
                     </button> 
-
                 </div>
               </div>
             </div>

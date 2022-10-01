@@ -5,7 +5,7 @@
     </div>
     <div class="col-md-auto">
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newExpModal"  *ngIf="isLogged">
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newExpModal"  *ngIf="isLogged" (click)="formEdit.reset()">
         <i class="bi bi-plus-lg"></i>
       </button>
     </div>
@@ -19,20 +19,59 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <form (ngSubmit)="onAgregar()">
+              <form [formGroup]="formEdit" (ngSubmit)="onAgregar($event)">
                   <label>Institución</label>
-                  <input type="text" class="form-control" id="nombreOrg" name="nombreOrg" [(ngModel)] = "nombreOrg" required>
+                  <input type="text" class="form-control" formControlName="nombre_org" id="nombreOrg" name="nombreOrg" required
+                    [ngClass]="{'is-invalid': Nombre_org?.errors  && Nombre_org?.touched, 'is-valid': !Nombre_org?.errors  && Nombre_org?.touched}">
+                  <div *ngIf="Nombre_org?.errors  && Nombre_org?.touched">
+                    <p class="text-danger">
+                      El campo es obligatorio
+                    </p>
+                  </div>
+                   
                   <label>Área/Cargo</label>
-                  <input type="text" class="form-control" id="areaCargo" name="areaCargo" [(ngModel)] = "areaCargo" required>
+                  <input type="text" class="form-control" formControlName="area_cargo" id="areaCargo" name="areaCargo" required
+                    [ngClass]="{'is-invalid': Area_cargo?.errors  && Area_cargo?.touched, 'is-valid': !Area_cargo?.errors  && Area_cargo?.touched}">
+                  <div *ngIf="Area_cargo?.errors  && Area_cargo?.touched">
+                    <p class="text-danger">
+                      El campo es obligatorio
+                    </p>
+                  </div>
+
                   <label>Año de inicio</label>
-                  <input type="text" class="form-control" id="anioInicio" name="anioInicio" [(ngModel)] = "anioInicio" required>
-                  <label>Año de finalización</label>
-                  <input type="text" class="form-control" id="anioFin" name="anioFin" [(ngModel)] = "anioFin" required>
+                  <input type="number" class="form-control" formControlName="anio_inicio" id="anioInicio" name="anioInicio" required
+                    [ngClass]="{'is-invalid': Anio_inicio?.errors  && Anio_inicio?.touched, 'is-valid': !Anio_inicio?.errors  && Anio_inicio?.touched}">
+                  <div *ngIf="Anio_inicio?.errors  && Anio_inicio?.touched">
+                    <p *ngIf="Anio_inicio?.hasError('required')" class="text-danger">
+                      El campo es obligatorio
+                    </p>
+                    <p *ngIf="Anio_inicio?.hasError('min') || Anio_inicio?.hasError('max')" class="text-danger">
+                      El año no es válido.
+                    </p>
+                  </div>
+
+                  <label>Año de finalización (Opcional)</label>
+                  <input type="number" class="form-control" formControlName="anio_fin" id="anioFin" name="anioFin"
+                    [ngClass]="{'is-invalid': Anio_fin?.errors  && Anio_fin?.touched, 'is-valid': !Anio_fin?.errors  && Anio_fin?.touched}">
+                  <div *ngIf="Anio_fin?.errors  && Anio_fin?.touched">
+                    <p class="text-danger">
+                      El año no es válido.
+                    </p>
+                  </div>
+
                   <label>URL de imagen</label>
-                  <textarea type="text" class="form-control" id="urlImg" name="urlImg" [(ngModel)] = "urlImg" required></textarea>
+                  <textarea type="text" class="form-control" formControlName="url_imagen" id="urlImg" name="urlImg" required
+                    [ngClass]="{'is-invalid': Url_imagen?.errors  && Url_imagen?.touched, 'is-valid': !Url_imagen?.errors  && Url_imagen?.touched}">
+                  </textarea>
+                  <div *ngIf="Url_imagen?.errors  && Url_imagen?.touched">
+                    <p class="text-danger">
+                      El campo es obligatorio
+                    </p>
+                  </div>
+
                   <div class="modal-footer">
-                      <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <button class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formEdit.invalid">Guardar</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="formEdit.reset()">Cerrar</button>
                   </div>
               </form>
           </div>
@@ -40,9 +79,7 @@
       </div>
   </div>
 </div>
-            <!-- <h4> Instituto de Previsión Social de la Provincia de Corrientes</h4>
-            <span>Área de Sistemas</span> <br>
-            <span> 2018 - 2020</span> -->
+           
   <div *ngFor= "let exp of experiencias" let i = index>
     <div class="card mb-3">
       <div class="row g-0">
@@ -63,38 +100,81 @@
               <!-- Modal -->
               <div class="modal fade" id="expModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Editar "Experiencia"</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form (ngSubmit)="onEditar()">
-                                <label>Institución</label>
-                                <input type="text" class="form-control" id="nombre_org" name="nombre_org" [(ngModel)] = "experiencia.nombre_org" required>
-                                <label>Área/Cargo</label>
-                                <input type="text" class="form-control" id="area_cargo" name="area_cargo" [(ngModel)] = "experiencia.area_cargo" required>
-                                <label>Año de inicio</label>
-                                <input type="text" class="form-control" id="anio_inicio" name="anio_inicio" [(ngModel)] = "experiencia.anio_inicio" required>
-                                <label>Año de finalización</label>
-                                <input type="text" class="form-control" id="anio_fin" name="anio_fin" [(ngModel)] = "experiencia.anio_fin" required>
-                                <label>URL de imagen</label>
-                                <textarea type="text" class="form-control" id="url_imagen" name="url_imagen" [(ngModel)] = "experiencia.url_imagen" required></textarea>
-                                <div class="modal-footer">
-                                    <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                </div>
-                            </form>
-                        </div>
-                        
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Editar "Experiencia"</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <div class="modal-body">
+              
+                      <form [formGroup]="formEdit" (ngSubmit)="onEditar($event)">
+                        <label>Institución</label>
+                        <input type="text" class="form-control" formControlName="nombre_org" id="nombre_org" name="nombre_org"
+                          required
+                          [ngClass]="{'is-invalid': Nombre_org?.errors  && Nombre_org?.touched, 'is-valid': !Nombre_org?.errors  && Nombre_org?.touched}">
+                        <div *ngIf="Nombre_org?.errors  && Nombre_org?.touched">
+                          <p class="text-danger">
+                            El campo es obligatorio
+                          </p>
+                        </div>
+              
+                        <label>Área/Cargo</label>
+                        <input type="text" class="form-control" formControlName="area_cargo" id="area_cargo" name="area_cargo"
+                          required
+                          [ngClass]="{'is-invalid': Area_cargo?.errors  && Area_cargo?.touched, 'is-valid': !Area_cargo?.errors  && Area_cargo?.touched}">
+                        <div *ngIf="Area_cargo?.errors  && Area_cargo?.touched">
+                          <p class="text-danger">
+                            El campo es obligatorio
+                          </p>
+                        </div>
+              
+                        <label>Año de inicio</label>
+                        <input type="number" class="form-control" formControlName="anio_inicio" id="anio_inicio" name="anio_inicio"
+                          required
+                          [ngClass]="{'is-invalid': Anio_inicio?.errors  && Anio_inicio?.touched, 'is-valid': !Anio_inicio?.errors  && Anio_inicio?.touched}">
+                        <div *ngIf="Anio_inicio?.errors  && Anio_inicio?.touched">
+                          <p *ngIf="Anio_inicio?.hasError('required')" class="text-danger">
+                            El campo es obligatorio
+                          </p>
+                          <p *ngIf="Anio_inicio?.hasError('min') || Anio_inicio?.hasError('max')" class="text-danger">
+                            El año no es válido.
+                          </p>
+                        </div>
+              
+                        <label>Año de finalización (Opcional)</label>
+                        <input type="number" class="form-control" formControlName="anio_fin" id="anio_fin" name="anio_fin"
+                          [ngClass]="{'is-invalid': Anio_fin?.errors  && Anio_fin?.touched, 'is-valid': !Anio_fin?.errors  && Anio_fin?.touched}">
+                        <div *ngIf="Anio_fin?.errors  && Anio_fin?.touched">
+                          <p class="text-danger">
+                            El año no es válido.
+                          </p>
+                        </div>
+              
+                        <label>URL de imagen</label>
+                        <textarea type="text" class="form-control" formControlName="url_imagen" id="url_imagen" name="url_imagen"
+                          required
+                          [ngClass]="{'is-invalid': Url_imagen?.errors  && Url_imagen?.touched, 'is-valid': !Url_imagen?.errors  && Url_imagen?.touched}">
+                                              </textarea>
+                        <div *ngIf="Url_imagen?.errors  && Url_imagen?.touched">
+                          <p class="text-danger">
+                            El campo es obligatorio
+                          </p>
+                        </div>
+              
+                        <div class="modal-footer">
+                          <button class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formEdit.invalid">Guardar</button>
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="formEdit.reset()">Cerrar</button>
+                        </div>
+                      </form>
+                    </div>
+              
+                  </div>
                 </div>
               </div>
 
               <button type="button" class="btn btn-secondary" (click)="borrar(exp.id || 0)" *ngIf="isLogged">
                 <i class="bi bi-trash3-fill"></i>
               </button> 
-
           </div>
         </div>
       </div>

@@ -21,8 +21,8 @@ export class AptitudService {
     return this.http.get<aptitud>(this.url + `${id}`);
   }
 
-  public editarAptitud(aptitud: aptitud): Observable<any>{
-    return this.http.put<any>(this.url + 'editar', aptitud);
+  public editarAptitud(id: any, aptitud: aptitud): Observable<any>{
+    return this.http.put<any>(this.url + `editar/${id}`, aptitud);
   }
 
   public agregarAptitud(aptitud: aptitud): Observable<any>{

@@ -32,13 +32,26 @@ export class IniciarSesionComponent implements OnInit {
     return this.formLogin.get('password');
   }
 
-  onEnviar(){
-    this.autenticacionService.login(this.formLogin.value)
-    .then(response =>{
-      this.user = response;
-      localStorage.setItem('user', JSON.stringify(this.user));
-      this.ruta.navigate(['']);
-    })
-    .catch(error => console.log(error));
+  onEnviar(event: Event) {
+
+    event.preventDefault;
+
+    if (this.formLogin.valid) {
+
+      this.autenticacionService.login(this.formLogin.value)
+        .then(response => {
+          this.user = response;
+          localStorage.setItem('user', JSON.stringify(this.user));
+          this.ruta.navigate(['']);
+        })
+        .catch(error => {
+          console.log(error);
+          alert("Email y/o Contraseña incorrectos");
+        })
+
+    } else {
+      this.formLogin.markAllAsTouched();
+    }
+
   }
 }

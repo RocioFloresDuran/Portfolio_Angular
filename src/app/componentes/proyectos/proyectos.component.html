@@ -2,14 +2,10 @@
     <div class="row justify-content-md-left">
         <div class="col-md-auto">
             <h2>Proyectos</h2>
-            <!-- <h4>Página web IPS Corrientes</h4>
-                        <p>Colaboración en el desarrollo del sitio web del Instituto de Previsión Social de la Provincia de Corrientes,
-                         utilizando HTML, CSS, Javascript y Laravel (framework PHP).
-                        </p> -->
         </div>
         <div class="col-md-auto">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newProyModal" *ngIf="isLogged">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newProyModal" *ngIf="isLogged" (click)="formEdit.reset()">
                 <i class="bi bi-plus-lg"></i>
             </button>
         </div>
@@ -23,14 +19,29 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form (ngSubmit)="onAgregar()">
+                    <form [formGroup]="formEdit" (ngSubmit)="onAgregar($event)">
                         <label>Nombre Proyecto</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="nombre" required>
+                        <input type="text" class="form-control" formControlName="nombre" id="nombre" name="nombre" required
+                        [ngClass]="{'is-invalid': Nombre?.errors  && Nombre?.touched, 'is-valid': !Nombre?.errors  && Nombre?.touched}">
+                        <div *ngIf="Nombre?.errors  && Nombre?.touched">
+                          <p class="text-danger">
+                            El campo es obligatorio
+                          </p>
+                        </div>
+
                         <label>Descripción</label>
-                        <input type="text" class="form-control" id="descripcion"name="descripcion" [(ngModel)]="descripcion" required>
+                        <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion"name="descripcion" required
+                        [ngClass]="{'is-invalid': Descripcion?.errors  && Descripcion?.touched, 'is-valid': !Descripcion?.errors  && Descripcion?.touched}">
+                        </textarea>
+                        <div *ngIf="Descripcion?.errors  && Descripcion?.touched">
+                            <p class="text-danger">
+                              El campo es obligatorio
+                            </p>
+                          </div>
+
                         <div class="modal-footer">
-                            <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formEdit.invalid">Guardar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="formEdit.reset()">Cerrar</button>
                         </div>
                     </form>
                 </div>
@@ -60,15 +71,29 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form (ngSubmit)="onEditar()">
-                                        <label>Nombre del Proyecto</label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)] = "proyecto.nombre" required>
+                                    <form [formGroup]="formEdit" (ngSubmit)="onEditar($event)">
+                                        <label>Nombre Proyecto</label>
+                                        <input type="text" class="form-control" formControlName="nombre" id="nombre" name="nombre" required
+                                            [ngClass]="{'is-invalid': Nombre?.errors  && Nombre?.touched, 'is-valid': !Nombre?.errors  && Nombre?.touched}">
+                                        <div *ngIf="Nombre?.errors  && Nombre?.touched">
+                                            <p class="text-danger">
+                                                El campo es obligatorio
+                                            </p>
+                                        </div>
+                                        
                                         <label>Descripción</label>
-                                        <textarea type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)] = "proyecto.descripcion" required></textarea>
+                                        <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion" name="descripcion" required
+                                            [ngClass]="{'is-invalid': Descripcion?.errors  && Descripcion?.touched, 'is-valid': !Descripcion?.errors  && Descripcion?.touched}">
+                                        </textarea>
+                                        <div *ngIf="Descripcion?.errors  && Descripcion?.touched">
+                                            <p class="text-danger">
+                                                El campo es obligatorio
+                                            </p>
+                                        </div>
                             
                                         <div class="modal-footer">
-                                            <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            <button class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formEdit.invalid">Guardar</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="formEdit.reset()">Cerrar</button>
                                         </div>
                                     </form>
                                 </div>                    

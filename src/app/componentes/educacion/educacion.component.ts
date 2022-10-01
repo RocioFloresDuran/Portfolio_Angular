@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { educacion } from 'src/app/model/educacion.model';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
 import { EducacionService } from 'src/app/servicios/educacion.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-educacion',
@@ -13,17 +14,24 @@ export class EducacionComponent implements OnInit {
 
   educaciones: educacion[] = [];
   educacion: educacion = new educacion('','','',0,0,'');
-  escuela: string = '';
-  titulo: string = '';
-  carrera: string = '';
-  anioInicio: number = 0;
-  anioFin: number = 0;
-  urlImg: string = '';
+  private date: Date = new Date();
+  private anio_actual = this.date.getFullYear();
 
   public isLogged: boolean;
+  formEdit: FormGroup;
 
-  constructor(public educacionService: EducacionService, private router: Router, public autenticacionService: AutenticacionService) { 
+  constructor(public educacionService: EducacionService, private router: Router, public autenticacionService: AutenticacionService,  private formBuilder: FormBuilder) { 
     this.isLogged = false;
+
+    this.formEdit = this.formBuilder.group({
+      escuela: ['', Validators.required],
+      titulo: ['', Validators.required],
+      carrera: ['', Validators.required],
+      anio_inicio: ['',[Validators.required, Validators.min(1900), Validators.max(this.anio_actual)]],
+      anio_fin: ['',[Validators.min(1900), Validators.max(this.anio_actual)]],
+      url_imagen: ['', Validators.required]
+    })
+
   }
 
   ngOnInit(): void {
@@ -38,35 +46,48 @@ export class EducacionComponent implements OnInit {
   }
   
   
-  onEditar(): void {
-    this.educacionService.editarEducacion(this.educacion).subscribe(
-      data => {
-        this.cargarEducaciones();
-      }, err => {
-        alert("Ocurrió un error");
-        this.router.navigate(['']);
-      }
-    )
+  onEditar(event: Event): void {
 
+    event.preventDefault;
+
+    if (this.formEdit.valid) {
+      this.educacionService.editarEducacion(this.educacion.id, this.formEdit.value).subscribe(
+        data => {
+          this.cargarEducaciones();
+          this.formEdit.reset();
+        }, err => {
+          alert("Ocurrió un error");
+          this.router.navigate(['']);
+        }
+      )
+    }
   }
 
   buscarEducacion(educId: number): void {
     this.educacionService.getEducacion(educId).subscribe(
       data => {
         this.educacion = data;
+        this.formEdit.patchValue(this.educacion);
       })
   }
 
-  onAgregar(): void {
-    const educ = new educacion(this.escuela, this.titulo, this.carrera, this.anioInicio, this.anioFin, this.urlImg);
-    this.educacionService.agregarEducacion(educ).subscribe(
-      data => {
-        this.cargarEducaciones();
-      }, err => {
-        alert("Ocurrió un error");
-        this.router.navigate(['']);
-      }
-    )
+  onAgregar(event: Event): void {
+
+    const educ = this.formEdit.value;
+
+    event.preventDefault;
+
+    if (this.formEdit.valid) {
+      this.educacionService.agregarEducacion(educ).subscribe(
+        data => {
+          this.cargarEducaciones();
+          this.formEdit.reset();
+        }, err => {
+          alert("Ocurrió un error");
+          this.router.navigate(['']);
+        }
+      )
+    }
   }
 
   borrar(id: number) {
@@ -80,6 +101,30 @@ export class EducacionComponent implements OnInit {
         }
       )
     }
+  }
+
+  get Escuela(){
+    return this.formEdit.get('escuela');
+  }
+
+  get Titulo(){
+    return this.formEdit.get('titulo');
+  }
+
+  get Carrera(){
+    return this.formEdit.get('carrera');
+  }
+
+  get Anio_inicio(){
+    return this.formEdit.get('anio_inicio');
+  }
+
+  get Anio_fin(){
+    return this.formEdit.get('anio_fin');
+  }
+
+  get Url_imagen(){
+    return this.formEdit.get('url_imagen');
   }
 
 }

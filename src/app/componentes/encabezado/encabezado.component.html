@@ -44,11 +44,11 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form (ngSubmit)="onEditar()">
+                            <form (ngSubmit)="onEditar($event)">
                                 <textarea type="text" class="form-control" id="url_header" name="url_header" [(ngModel)] = "persona.url_header" required></textarea>
                                 <div class="modal-footer">
                                     <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cargarPersona()">Cerrar</button>
                                 </div>
                             </form>
                         </div>       
@@ -78,11 +78,11 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form (ngSubmit)="onEditar()">
+                            <form (ngSubmit)="onEditar($event)">
                                 <textarea type="text" class="form-control" id="url_foto" name="url_foto" [(ngModel)] = "persona.url_foto" required></textarea>
                                 <div class="modal-footer">
                                     <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cargarPersona()">Cerrar</button>
                                 </div>
                             </form>
                         </div>       
@@ -101,7 +101,7 @@
                     
                 <!-- Button trigger modal -->
             
-                <button type="button" id="trigger" class="btn btn-secondary float-center" data-bs-toggle="modal" data-bs-target="#modalDatosPersonales" *ngIf="isLogged">
+                <button type="button" id="trigger" class="btn btn-secondary float-center" data-bs-toggle="modal" data-bs-target="#modalDatosPersonales" *ngIf="isLogged" (click)="cargarForm()">
                     <i class="bi bi-pencil-fill"></i>
                 </button>
             
@@ -120,18 +120,44 @@
                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                        </div>
                        <div class="modal-body">
-                           <form (ngSubmit)="onEditar()">
+
+                           <form [formGroup]="form" (ngSubmit)="onEditar($event)">
                                <label>Ocupación</label>
-                               <input type="text" class="form-control" id="ocupacion" name="ocupacion" [(ngModel)] = "persona.ocupacion" required>
+                               <input type="text" class="form-control" formControlName="ocupacion"
+                               id="ocupacion" name="ocupacion" required
+                               [ngClass]="{'is-invalid': Ocupacion?.errors  && Ocupacion?.touched, 'is-valid': !Ocupacion?.errors  && Ocupacion?.touched}">
+                               <div *ngIf="Ocupacion?.errors  && Ocupacion?.touched">    
+                                <p class="text-danger">
+                                    El campo es obligatorio
+                                </p>
+                                </div>
+
                                <label>Provincia</label>
-                               <input type="text" class="form-control" id="domicilio.provincia" name="domicilio.provincia" [(ngModel)] = "persona.domicilio.provincia" required>
+                               <input type="text" class="form-control" formControlName="provincia"
+                               id="domicilio.provincia" name="domicilio.provincia" required
+                               [ngClass]="{'is-invalid': Provincia?.errors  && Provincia?.touched, 'is-valid': !Provincia?.errors  && Provincia?.touched}">
+                               <div *ngIf="Provincia?.errors  && Provincia?.touched">    
+                                <p class="text-danger">
+                                    El campo es obligatorio
+                                </p>
+                                </div>
+
                                <label>Localidad</label>
-                               <input type="text" class="form-control" id="domicilio.localidad" name="domicilio.localidad" [(ngModel)] = "persona.domicilio.localidad" required>
+                               <input type="text" class="form-control" formControlName="localidad"
+                               id="domicilio.localidad" name="domicilio.localidad" required
+                               [ngClass]="{'is-invalid': Localidad?.errors  && Localidad?.touched, 'is-valid': !Localidad?.errors  && Localidad?.touched}">
+                               <div *ngIf="Localidad?.errors  && Localidad?.touched">    
+                                <p class="text-danger">
+                                    El campo es obligatorio
+                                </p>
+                                </div>
+
                                <div class="modal-footer">
-                                   <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
-                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                   <button class="btn btn-primary" data-bs-dismiss="modal" [disabled]="form.invalid">Guardar</button>
+                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="form.reset()">Cerrar</button>
                                </div>
                            </form>
+                           
                        </div>       
                    </div>
                </div>

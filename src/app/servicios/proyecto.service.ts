@@ -21,8 +21,8 @@ idPersona = '2'
     return this.http.get<proyecto>(this.url + `${id}`);
   }
 
-  public editarProyecto(proyecto: proyecto): Observable<any>{
-    return this.http.put<any>(this.url + 'editar', proyecto);
+  public editarProyecto(id: any, proyecto: proyecto): Observable<any>{
+    return this.http.put<any>(this.url + `editar/${id}`, proyecto);
   }
 
   public agregarProyecto(proyecto: proyecto): Observable<any>{
