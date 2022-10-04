@@ -4,16 +4,73 @@
     margin-left: 1em;
 }
 
+#cabecera{
+    height: 60px;
+    background-color: #020c1b;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    align-content: space-around;
+}
+
 #portada{
     width: auto;
     height: 350px;
     background-repeat: no-repeat;
     background-position: center;
     background-size:cover;
+    margin: auto;
 }
 
 #datosPersonales{
     background-color: #0a192f;
     color:#8892b0;
     padding: 10px;
+    margin: auto;
+}
+
+#botonBanner{
+    display: flex;
+    align-items: center;
+}
+
+#logo{
+    width: 175px;
+    min-width: 125px;
+    padding-right: 20px;
+} 
+
+#logoAP{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.redes{
+    float:right;
+    font-size: 2em;
+    color:#8892b0;
+    margin-right: 15px;
+}
+
+.redes:hover{
+    color:#64ffda;
+}
+
+#redes{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#login,#logout{
+    background-color: #020c1b;
+    border-color: #8892b0;
+    color: #8892b0;
+}
+
+#login:hover,#logout:hover{
+    background-color: #64ffda;
+    border-color: #8892b0;
+    color: #020c1b;
 }

@@ -25,22 +25,6 @@ footer{
     padding-top: 25px;
 }
 
-#logo{
-    height: 100px;
-    margin-top: -15px;
-    width: auto;
-    padding-bottom: 10px;
-} 
-
-.redes{
-    padding-top: 5px;
-}
-
-#cabecera{
-    height: 55px;
-    background-color: #020c1b;
-}
-
 #Rocio{
     border-radius: 50%;
 }
@@ -50,16 +34,6 @@ footer{
     height: auto;
     margin-left: 20px;
     margin-top: -70px;
-}
-
-#banner{
-    height: 300px;
-    width: auto;
-}
-
-#portada{
-    justify-content: center;
-    /* background-image: url(./assets/img/banner.png); */
 }
 
 h2{

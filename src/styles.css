@@ -25,22 +25,6 @@ footer{
     padding-top: 25px;
 }
 
-#logo{
-    height: 100px;
-    margin-top: -15px;
-    width: auto;
-    padding-bottom: 10px;
-} 
-
-.redes{
-    padding-top: 5px;
-}
-
-#cabecera{
-    height: 55px;
-    background-color: #020c1b;
-}
-
 #Rocio{
     border-radius: 50%;
 }
@@ -56,11 +40,6 @@ h2{
     color: #ccd6f6;
     font-family:sans-serif;
     font:bold;
-}
-
-#logout, #login{
-    margin-top: 10px;
-    margin-right: 10px;
 }
 
 /*--------------- Barras de progreso para Skills----------------------- */

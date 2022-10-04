@@ -2,35 +2,34 @@
 
 <header>
 
-    <div class="container">
 
         <div class="row" id="cabecera">
+
+            <div class="col-3">
+
+                <img src="./assets/img/ArgProg3.png" class="img-fluid" alt="Logo Argentina Programa" id="logo">
+
+            </div>
+
+            <div class="col" id="redes">
         
-            <div class="col">
-
-                <img src="./assets/img/ArgProg3.png" class="" alt="Logo Argentina Programa" id="logo">
-
-                
-       
-                <img src="./assets/img/icons8-facebook-48.png" class="redes float-end" alt="">
+                <a href="https://github.com/RocioFloresDuran" target="_blank"><i class="bi bi-github redes"></i></a>
            
-                <img src="./assets/img/icons8-instagram-48.png" class="redes float-end" alt="">
-         
-                <img src="./assets/img/icons8-linkedin-48.png" class="redes float-end" alt="">
+                <a href="https://www.linkedin.com/in/roc%C3%ADo-flores-dur%C3%A1n-149083160" target="_blank"><i class="bi bi-linkedin redes"></i></a>
+
+                <a href="https://instagram.com/rociofloresduran?igshid=YmMyMTA2M2Y=" target="_blank"><i class="bi bi-instagram redes"></i></a>
 
                 <button class="btn btn-danger float-end" id="logout" (click)="onClick()" *ngIf="isLogged">Cerrar Sesión</button>
 
                 <button class="btn btn-success float-end" id="login" routerLink="/iniciar-sesion"  *ngIf="!isLogged">Iniciar Sesión</button>
-
             </div>
 
         </div>
 
-        <div class="row justify-content-end"  id="portada" style=" background-image: url({{persona.url_header}});">
-            <!-- <img src="./assets/img/banner.png" class="img-fluid" alt="banner" id="banner"> -->   
+        <div class="row justify-content-end"  id="portada" style=" background-image: url({{persona.url_header}});">  
              
             <!-- Button trigger modal -->
-            <div class="col-2">
+            <div class="col-2" id="botonBanner">
                 <button type="button" id="trigger"class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalBanner" *ngIf="isLogged">
                 <i class="bi bi-pencil-fill"></i>
                 </button>
@@ -60,7 +59,6 @@
                        
         <div class="row" id="perfil">
             <div class="col-10">
-                <!-- <img src="./assets/img/Yo.jpg" class="img-fluid float-start" alt="Rocío Flores Durán" id="Rocio"> -->
                 <img src= {{persona.url_foto}} class="img-fluid float-start" alt="Rocío Flores Durán" id="Rocio">
             </div>
                 <!-- Button trigger modal -->
@@ -164,8 +162,6 @@
            </div>
 
         </div>
-        
-    </div>
 
 </header>
 
