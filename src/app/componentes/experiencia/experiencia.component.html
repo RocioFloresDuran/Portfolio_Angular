@@ -90,7 +90,7 @@
           <div class="card-body">
               <h5 class="card-title">{{exp.nombre_org}}</h5>
               <p class="card-text"><span>{{exp.area_cargo}}</span></p>
-              <p class="card-text"><small class="text-muted"> <span>{{exp.anio_inicio}} - {{exp.anio_fin}}</span></small></p>
+              <p class="card-text"><small class="text-muted"> <span>{{exp.anio_inicio}} - {{exp.anio_fin}}</span><span *ngIf="exp.anio_fin==null">Activo</span></small></p>
               
               <!-- Button trigger modal -->
               <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#expModal" (click)="buscarExperiencia(exp.id || 0)" *ngIf="isLogged">

@@ -102,7 +102,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{educ.escuela}}</h5>
                     <p class="card-text"><span>{{educ.titulo}} - {{educ.carrera}}</span></p>
-                    <p class="card-text"><small class="text-muted"> <span>{{educ.anio_inicio}} - {{educ.anio_fin}}</span></small></p>
+                    <p class="card-text"><small class="text-muted"> <span>{{educ.anio_inicio}} - {{educ.anio_fin}}</span><span *ngIf="educ.anio_fin==null">En curso</span></small></p>
 
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#educModal" (click)="buscarEducacion(educ.id!)" *ngIf="isLogged">
