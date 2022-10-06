@@ -54,4 +54,8 @@ export class IniciarSesionComponent implements OnInit {
     }
 
   }
+
+  onClick(){
+    this.ruta.navigate(['']);
+  }
 }
