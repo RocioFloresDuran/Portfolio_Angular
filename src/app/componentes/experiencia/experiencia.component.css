@@ -11,3 +11,7 @@ button{
     margin-bottom: 2em;
     margin-left: 0.5em;
 }
+
+.col-md-auto{
+    display: flex;
+}

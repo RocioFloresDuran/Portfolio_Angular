@@ -2,112 +2,115 @@
     <div class="row justify-content-md-left">
         <div class="col-md-auto">
             <h2>Proyectos</h2>
-        </div>
-        <div class="col-md-auto">
+        
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#newProyModal" *ngIf="isLogged" (click)="formEdit.reset()">
                 <i class="bi bi-plus-lg"></i>
             </button>
-        </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="newProyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Agregar Proyecto</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form [formGroup]="formEdit" (ngSubmit)="onAgregar($event)">
-                        <label>Nombre Proyecto</label>
-                        <input type="text" class="form-control" formControlName="nombre" id="nombre" name="nombre" required
-                        [ngClass]="{'is-invalid': Nombre?.errors  && Nombre?.touched, 'is-valid': !Nombre?.errors  && Nombre?.touched}">
-                        <div *ngIf="Nombre?.errors  && Nombre?.touched">
-                          <p class="text-danger">
-                            El campo es obligatorio
-                          </p>
-                        </div>
 
-                        <label>Descripción</label>
-                        <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion"name="descripcion" required
-                        [ngClass]="{'is-invalid': Descripcion?.errors  && Descripcion?.touched, 'is-valid': !Descripcion?.errors  && Descripcion?.touched}">
-                        </textarea>
-                        <div *ngIf="Descripcion?.errors  && Descripcion?.touched">
-                            <p class="text-danger">
-                              El campo es obligatorio
-                            </p>
-                          </div>
-
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formEdit.invalid">Guardar</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="formEdit.reset()">Cerrar</button>
+            <!-- Modal -->
+            <div class="modal fade" id="newProyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Agregar Proyecto</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                    </form>
-                </div>
-    
-            </div>
-        </div>
-    </div>
-            
-        <div *ngFor= "let proy of proyectos" let i = index>
-            <div class="row">
-                <div class="col-10"> 
-                    <h4>{{proy.nombre}}</h4>
-                    <p>{{proy.descripcion}}</p>
-                </div>
-                <div class="col-2"> 
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#proyecModal" (click)="buscarProyecto(proy.id!)" *ngIf="isLogged">
-                        <i class="bi bi-pencil-fill"></i>
-                    </button>
-                     
-                    <!-- Modal -->
-                    <div class="modal fade" id="proyecModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Editar "Proyecto"</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal-body">
+                            <form [formGroup]="formEdit" (ngSubmit)="onAgregar($event)">
+                                <label>Nombre Proyecto</label>
+                                <input type="text" class="form-control" formControlName="nombre" id="nombre" name="nombre" required
+                                    [ngClass]="{'is-invalid': Nombre?.errors  && Nombre?.touched, 'is-valid': !Nombre?.errors  && Nombre?.touched}">
+                                <div *ngIf="Nombre?.errors  && Nombre?.touched">
+                                    <p class="text-danger">
+                                        El campo es obligatorio
+                                    </p>
                                 </div>
-                                <div class="modal-body">
-                                    <form [formGroup]="formEdit" (ngSubmit)="onEditar($event)">
-                                        <label>Nombre Proyecto</label>
-                                        <input type="text" class="form-control" formControlName="nombre" id="nombre" name="nombre" required
-                                            [ngClass]="{'is-invalid': Nombre?.errors  && Nombre?.touched, 'is-valid': !Nombre?.errors  && Nombre?.touched}">
-                                        <div *ngIf="Nombre?.errors  && Nombre?.touched">
-                                            <p class="text-danger">
-                                                El campo es obligatorio
-                                            </p>
-                                        </div>
-                                        
-                                        <label>Descripción</label>
-                                        <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion" name="descripcion" required
-                                            [ngClass]="{'is-invalid': Descripcion?.errors  && Descripcion?.touched, 'is-valid': !Descripcion?.errors  && Descripcion?.touched}">
+            
+                                <label>Descripción</label>
+                                <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion"
+                                    name="descripcion" required
+                                    [ngClass]="{'is-invalid': Descripcion?.errors  && Descripcion?.touched, 'is-valid': !Descripcion?.errors  && Descripcion?.touched}">
                                         </textarea>
-                                        <div *ngIf="Descripcion?.errors  && Descripcion?.touched">
-                                            <p class="text-danger">
-                                                El campo es obligatorio
-                                            </p>
-                                        </div>
-                            
-                                        <div class="modal-footer">
-                                            <button class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formEdit.invalid">Guardar</button>
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="formEdit.reset()">Cerrar</button>
-                                        </div>
-                                    </form>
-                                </div>                    
+                                <div *ngIf="Descripcion?.errors  && Descripcion?.touched">
+                                    <p class="text-danger">
+                                        El campo es obligatorio
+                                    </p>
+                                </div>
+            
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" data-bs-dismiss="modal"
+                                        [disabled]="formEdit.invalid">Guardar</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                        (click)="formEdit.reset()">Cerrar</button>
+                                </div>
+                            </form>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+        
+            
+    <div *ngFor= "let proy of proyectos" let i = index>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{proy.nombre}}</h5>
+
+                <p class="card-text">{{proy.descripcion}}</p>
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#proyecModal" (click)="buscarProyecto(proy.id!)" *ngIf="isLogged">
+                    <i class="bi bi-pencil-fill"></i>
+                </button>
+                 
+                <!-- Modal -->
+                <div class="modal fade" id="proyecModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Editar "Proyecto"</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
+                            <div class="modal-body">
+                                <form [formGroup]="formEdit" (ngSubmit)="onEditar($event)">
+                                    <label>Nombre Proyecto</label>
+                                    <input type="text" class="form-control" formControlName="nombre" id="nombre" name="nombre" required
+                                        [ngClass]="{'is-invalid': Nombre?.errors  && Nombre?.touched, 'is-valid': !Nombre?.errors  && Nombre?.touched}">
+                                    <div *ngIf="Nombre?.errors  && Nombre?.touched">
+                                        <p class="text-danger">
+                                            El campo es obligatorio
+                                        </p>
+                                    </div>
+                                    
+                                    <label>Descripción</label>
+                                    <textarea type="text" class="form-control" formControlName="descripcion" id="descripcion" name="descripcion" required
+                                        [ngClass]="{'is-invalid': Descripcion?.errors  && Descripcion?.touched, 'is-valid': !Descripcion?.errors  && Descripcion?.touched}">
+                                    </textarea>
+                                    <div *ngIf="Descripcion?.errors  && Descripcion?.touched">
+                                        <p class="text-danger">
+                                            El campo es obligatorio
+                                        </p>
+                                    </div>
+                        
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" data-bs-dismiss="modal" [disabled]="formEdit.invalid">Guardar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="formEdit.reset()">Cerrar</button>
+                                    </div>
+                                </form>
+                            </div>                    
                         </div>
                     </div>
-
-                    <button type="button" class="btn btn-secondary" (click)="borrar(proy.id || 0)" *ngIf="isLogged">
-                        <i class="bi bi-trash3-fill"></i>
-                    </button> 
-                  
                 </div>
-            </div> 
-        </div>
-       
 
+                <button type="button" class="btn btn-secondary" (click)="borrar(proy.id || 0)" *ngIf="isLogged">
+                    <i class="bi bi-trash3-fill"></i>
+                </button> 
+
+            </div>
+        </div>
+    </div>       
 </section>
