@@ -20,13 +20,7 @@ export class AutenticacionService {
   }
 
   usuarioLogueado() {
-    if (localStorage.getItem('user') != null) {
-      console.log(JSON.parse(localStorage.getItem('user')!) + ' ESTÁ LOGGED');
-      return true;
-    } else {
-      console.log(JSON.parse(localStorage.getItem('user')!) + ' NO Está LOGGED :(((')
-      return false;
-    }
+    return localStorage.getItem('user') != null;
   }
 
 }

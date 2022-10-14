@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "rociofloresduran": "rocio-floresduran",
+    "default": "rocio-floresduran"
+  },
+  "targets": {},
+  "etags": {}
+}

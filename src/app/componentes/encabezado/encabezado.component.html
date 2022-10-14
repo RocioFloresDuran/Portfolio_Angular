@@ -5,13 +5,12 @@
 
         <div class="row" id="cabecera">
 
-            <div class="col-3">
-
-                <img src="./assets/img/ArgProg3.png" class="img-fluid" alt="Logo Argentina Programa" id="logo">
-
-            </div>
-
             <div class="col" id="redes">
+
+                <div class="col">
+                    <img src="./assets/img/ArgProg3.png" class="img-fluid" alt="Logo Argentina Programa" id="logo">
+                </div>
+            
         
                 <a href="https://github.com/RocioFloresDuran" target="_blank"><i class="bi bi-github redes"></i></a>
            
@@ -43,7 +42,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form (ngSubmit)="onEditar($event)">
+                            <form (ngSubmit)="editarUrl()">
                                 <textarea type="text" class="form-control" id="url_header" name="url_header" [(ngModel)] = "persona.url_header" required></textarea>
                                 <div class="modal-footer">
                                     <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
@@ -76,7 +75,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form (ngSubmit)="onEditar($event)">
+                            <form (ngSubmit)="editarUrl()">
                                 <textarea type="text" class="form-control" id="url_foto" name="url_foto" [(ngModel)] = "persona.url_foto" required></textarea>
                                 <div class="modal-footer">
                                     <button class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>

@@ -44,14 +44,7 @@ header{
 #logo{
     width: 175px;
     min-width: 125px;
-    padding-right: 20px;
 } 
-
-#logoAP{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
 
 .redes{
     float:right;

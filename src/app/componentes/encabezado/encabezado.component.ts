@@ -69,6 +69,17 @@ export class EncabezadoComponent implements OnInit {
     }
   }
 
+  editarUrl(): void {
+      this.personaService.editarPersona(this.persona).subscribe(
+        data => {
+           this.cargarPersona();
+        }, err => {
+          alert("Ocurrió un error");
+          this.router.navigate(['']);
+        }
+      )
+  }
+
   onClick(){
     this.autenticacionService.logout()
     .then(() =>{

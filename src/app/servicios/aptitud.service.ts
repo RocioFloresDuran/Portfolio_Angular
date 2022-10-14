@@ -8,7 +8,7 @@ import { aptitud } from '../model/aptitud.model';
 })
 export class AptitudService {
 
-  url = 'http://localhost:8080/personas/aptitud/'
+  url = 'https://backendportfolio2022.herokuapp.com/personas/aptitud/'
   idPersona = '2'
 
   constructor(private http: HttpClient) { }

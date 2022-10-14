@@ -9,8 +9,8 @@ import { persona } from '../model/persona.model';
 })
 export class PersonaService {
 
-  url = 'http://localhost:8080/personas/';
-  url2  = 'http://localhost:8080/domicilios/editar/1';
+  url = 'https://backendportfolio2022.herokuapp.com/personas/';
+  url2  = 'https://backendportfolio2022.herokuapp.com/domicilios/editar/1';
 
   constructor(private http:HttpClient) { }
 
